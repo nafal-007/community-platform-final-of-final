@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, ThumbsUp, ShieldCheck, Clock, Send, Loader2 } from "lucide-react";
+import { MessageSquare, ThumbsUp, ShieldCheck, Clock, Send, Loader2, Share2, Check } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -22,6 +22,8 @@ export default function PostCard({ post }: { post: any }) {
     const [showComments, setShowComments] = useState(false);
     const [commentContent, setCommentContent] = useState("");
     const [commentLoading, setCommentLoading] = useState(false);
+
+    const [copied, setCopied] = useState(false);
 
     // Optimistic comments
     const [comments, setComments] = useState(post.comments || []);
@@ -79,6 +81,15 @@ export default function PostCard({ post }: { post: any }) {
         }
     };
 
+    const handleShare = () => {
+        // Fallback to post.communityId if community isn't populated
+        const communityName = post.community?.name || post.communityId;
+        const url = `${window.location.origin}/c/${communityName}/p/${post.id}`;
+        navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
         <article className="glass-panel p-5 border border-surface-100 hover:border-surface-200 transition-all group">
             <div className="flex justify-between items-start mb-3">
@@ -117,10 +128,28 @@ export default function PostCard({ post }: { post: any }) {
                     {post.content}
                 </p>
 
-                {post.imageUrl && (
+                {post.mediaUrl && post.mediaType === "IMAGE" && (
                     <div className="w-full mb-4 rounded-xl overflow-hidden border border-surface-100 bg-surface-900 flex justify-center items-center">
-                        <img src={post.imageUrl} alt="Post attachment" className="w-full h-auto object-contain max-h-[500px]" />
+                        <img src={post.mediaUrl} alt="Post attachment" className="w-full h-auto object-contain max-h-[500px]" />
                     </div>
+                )}
+
+                {post.mediaUrl && post.mediaType === "VIDEO" && (
+                    <div className="w-full mb-4 rounded-xl overflow-hidden border border-surface-100 bg-surface-900 flex justify-center items-center">
+                        <video src={post.mediaUrl} controls className="w-full h-auto max-h-[500px] outline-none" />
+                    </div>
+                )}
+
+                {post.mediaUrl && post.mediaType === "DOCUMENT" && (
+                    <a href={post.mediaUrl} target="_blank" rel="noopener noreferrer" className="w-full mb-4 bg-surface-100 hover:bg-surface-200 border border-surface-200 rounded-xl p-4 flex items-center gap-3 transition-colors text-white font-medium group block">
+                        <div className="w-10 h-10 rounded-lg bg-surface-50 text-brand-500 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+                            📎
+                        </div>
+                        <div>
+                            <div className="text-sm">Attached Document</div>
+                            <div className="text-xs text-slate-400 font-normal">Click to view or download</div>
+                        </div>
+                    </a>
                 )}
 
                 <div className="flex items-center gap-6 mt-4 pt-4 border-t border-surface-100">
@@ -138,6 +167,15 @@ export default function PostCard({ post }: { post: any }) {
                     >
                         <MessageSquare className={`w-4 h-4 ${showComments ? 'fill-white' : ''}`} />
                         <span>{commentCount} Comments</span>
+                    </button>
+
+                    <button
+                        onClick={handleShare}
+                        className="flex items-center gap-2 transition-colors text-sm font-medium text-slate-400 hover:text-brand-500 ml-auto"
+                        title="Copy post link"
+                    >
+                        {copied ? <Check className="w-4 h-4 text-brand-500" /> : <Share2 className="w-4 h-4" />}
+                        <span className={copied ? "text-brand-500" : ""}>{copied ? "Copied!" : "Share"}</span>
                     </button>
                 </div>
 

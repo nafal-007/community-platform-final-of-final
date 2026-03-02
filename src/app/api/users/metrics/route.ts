@@ -17,10 +17,14 @@ export async function GET() {
 
         const ObjectWithScore = await prisma.post.findMany({
             where: { authorId: session.user.id },
-            select: { validityScore: true }
+            include: {
+                _count: {
+                    select: { likes: true }
+                }
+            }
         });
 
-        const totalScore = ObjectWithScore.reduce((sum, post) => sum + (post.validityScore || 0), 0);
+        const totalScore = ObjectWithScore.reduce((sum, post) => sum + (post._count?.likes || 0), 0);
 
         return NextResponse.json({ communitiesCount, totalScore }, { status: 200 });
 

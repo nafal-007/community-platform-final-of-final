@@ -114,7 +114,8 @@ model Post {
   id          String   @id @default(uuid())
   title       String
   content     String
-  imageUrl    String?
+  mediaUrl    String?
+  mediaType   String?  // e.g., "IMAGE", "VIDEO", "DOCUMENT"
   
   validityScore Int      @default(0) // AI or user-driven scoring to prevent misinformation
   isEmergency   Boolean  @default(false)

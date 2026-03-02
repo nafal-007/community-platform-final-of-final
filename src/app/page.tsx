@@ -113,7 +113,11 @@ export default function DashboardPage() {
               >
                 <div className="w-16 h-16 rounded-2xl p-[2px] bg-gradient-to-tr from-surface-100 to-surface-200 group-hover:from-brand-500 group-hover:to-brand-400 transition-all duration-300 shadow-md">
                   <div className="w-full h-full rounded-xl bg-surface-800 border-2 border-surface-900 flex items-center justify-center overflow-hidden">
-                    <Hash className="w-6 h-6 text-brand-500 group-hover:scale-110 transition-transform" />
+                    {c.community.avatarUrl ? (
+                      <img src={c.community.avatarUrl} alt={c.community.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                    ) : (
+                      <Hash className="w-6 h-6 text-brand-500 group-hover:scale-110 transition-transform" />
+                    )}
                   </div>
                 </div>
                 <span className="text-xs text-slate-400 group-hover:text-white transition-colors truncate w-full text-center font-medium">

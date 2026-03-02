@@ -14,10 +14,11 @@
 }
 
 :root {
+  /* User requested light mode high contrast: white background, black options */
   --surface-50: #ffffff;
-  --surface-100: #f1f5f9;
-  --surface-800: #ffffff;
-  --surface-900: #0f172a;
+  --surface-100: #e2e8f0;
+  --surface-800: #f8fafc;
+  --surface-900: #000000;
 }
 
 [data-theme='dark'] {

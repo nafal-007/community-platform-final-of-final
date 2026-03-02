@@ -125,7 +125,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 h-full">
             {/* Left Column: Editor */}
             <div className="flex-1 flex flex-col min-h-[500px]">
-                <div className="glass-panel flex flex-col h-full border-t-4 border-t-brand-500 rounded-none rounded-b-2xl overflow-hidden">
+                <div className="glass-panel flex flex-col h-full border-t-4 border-t-brand-500 rounded-none rounded-b-2xl overflow-x-hidden overflow-y-auto custom-scrollbar">
 
                     {/* Header */}
                     <div className="p-6 bg-surface-800/50 border-b border-surface-100 flex items-center justify-between">

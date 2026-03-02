@@ -51,3 +51,6 @@ dev.db-journal
 
 # Temp logs
 ts_errors*.log
+
+.vercel
+.env*.local

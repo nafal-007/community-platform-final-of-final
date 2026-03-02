@@ -7,8 +7,9 @@ import { Loader2, Send, AlertTriangle, Image as ImageIcon, X } from "lucide-reac
 export default function CreatePostForm({ communityId }: { communityId: string }) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [imageFile, setImageFile] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [mediaFile, setMediaFile] = useState<File | null>(null);
+    const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+    const [mediaType, setMediaType] = useState<"IMAGE" | "VIDEO" | "DOCUMENT" | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -18,23 +19,33 @@ export default function CreatePostForm({ communityId }: { communityId: string })
         const file = e.target.files?.[0];
         if (!file) return;
 
-        if (file.size > 10 * 1024 * 1024) { // 10MB limit
-            setError("Image size cannot exceed 10MB.");
+        if (file.size > 50 * 1024 * 1024) { // 50MB limit
+            setError("File size cannot exceed 50MB.");
             return;
         }
 
-        setImageFile(file);
+        setMediaFile(file);
         setError("");
 
-        // Create preview
-        const reader = new FileReader();
-        reader.onloadend = () => setImagePreview(reader.result as string);
-        reader.readAsDataURL(file);
+        let type: "IMAGE" | "VIDEO" | "DOCUMENT" = "DOCUMENT";
+        if (file.type.startsWith("image/")) type = "IMAGE";
+        else if (file.type.startsWith("video/")) type = "VIDEO";
+
+        setMediaType(type);
+
+        if (type === "IMAGE" || type === "VIDEO") {
+            const reader = new FileReader();
+            reader.onloadend = () => setMediaPreview(reader.result as string);
+            reader.readAsDataURL(file);
+        } else {
+            setMediaPreview(file.name);
+        }
     };
 
-    const removeImage = () => {
-        setImageFile(null);
-        setImagePreview(null);
+    const removeMedia = () => {
+        setMediaFile(null);
+        setMediaPreview(null);
+        setMediaType(null);
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
 
@@ -44,26 +55,26 @@ export default function CreatePostForm({ communityId }: { communityId: string })
         setError("");
 
         try {
-            let uploadedImageUrl = undefined;
+            let uploadedMediaUrl = undefined;
 
-            if (imageFile) {
+            if (mediaFile) {
                 const formData = new FormData();
-                formData.append("file", imageFile);
+                formData.append("file", mediaFile);
 
                 const uploadRes = await fetch("/api/upload", {
                     method: "POST",
                     body: formData,
                 });
 
-                if (!uploadRes.ok) throw new Error("Failed to upload image.");
+                if (!uploadRes.ok) throw new Error("Failed to upload media.");
                 const uploadData = await uploadRes.json();
-                uploadedImageUrl = uploadData.url;
+                uploadedMediaUrl = uploadData.url;
             }
 
             const res = await fetch(`/api/communities/${communityId}/posts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title, content, imageUrl: uploadedImageUrl })
+                body: JSON.stringify({ title, content, mediaUrl: uploadedMediaUrl, mediaType })
             });
 
             if (!res.ok) {
@@ -73,8 +84,9 @@ export default function CreatePostForm({ communityId }: { communityId: string })
 
             setTitle("");
             setContent("");
-            setImageFile(null);
-            setImagePreview(null);
+            setMediaFile(null);
+            setMediaPreview(null);
+            setMediaType(null);
             if (fileInputRef.current) fileInputRef.current.value = "";
             router.refresh(); // Reload the feeds
         } catch (err: any) {
@@ -116,12 +128,18 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                     className="w-full bg-surface-50 border border-surface-100 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all text-sm resize-none placeholder:text-slate-500"
                 />
 
-                {imagePreview && (
-                    <div className="relative w-full rounded-xl overflow-hidden border border-surface-100 bg-black max-h-[400px] flex items-center justify-center">
-                        <img src={imagePreview} alt="Preview" className="max-w-full max-h-[400px] object-contain" />
+                {mediaPreview && (
+                    <div className="relative w-full rounded-xl overflow-hidden border border-surface-100 bg-black max-h-[400px] flex items-center justify-center p-2">
+                        {mediaType === "IMAGE" && <img src={mediaPreview} alt="Preview" className="max-w-full max-h-[400px] object-contain rounded-lg" />}
+                        {mediaType === "VIDEO" && <video src={mediaPreview} controls className="max-w-full max-h-[400px] object-contain rounded-lg" />}
+                        {mediaType === "DOCUMENT" && (
+                            <div className="text-white flex flex-col items-center justify-center h-32 text-sm font-bold opacity-80">
+                                📎 {mediaPreview}
+                            </div>
+                        )}
                         <button
                             type="button"
-                            onClick={removeImage}
+                            onClick={removeMedia}
                             className="absolute top-3 right-3 p-1.5 bg-black/60 text-white rounded-full hover:bg-red-500 transition-colors backdrop-blur-sm"
                         >
                             <X className="w-4 h-4" />
@@ -133,7 +151,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                     <div>
                         <input
                             type="file"
-                            accept="image/jpeg, image/png, image/webp"
+                            accept="image/jpeg, image/png, image/webp, video/mp4, application/pdf"
                             className="hidden"
                             ref={fileInputRef}
                             onChange={handleFileChange}
@@ -144,7 +162,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                             className="flex items-center gap-2 px-4 py-2 bg-surface-100 hover:bg-surface-200 text-slate-300 font-bold rounded-xl transition-colors text-sm"
                         >
                             <ImageIcon className="w-4 h-4 text-brand-500" />
-                            Attach Image
+                            Attach Media
                         </button>
                     </div>
 
