@@ -16,6 +16,48 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
     const resolvedParams = await params;
     const decodedName = decodeURIComponent(resolvedParams.name);
 
+    // Build the query options dynamically to avoid Prisma v5 'false' include type errors
+    // We construct the base include object that doesn't depend on session
+    const baseInclude = {
+        _count: {
+            select: { members: true }
+        },
+        posts: {
+            include: {
+                author: {
+                    select: { name: true, image: true, role: true }
+                },
+                comments: {
+                    include: {
+                        author: {
+                            select: { name: true, image: true }
+                        }
+                    },
+                    orderBy: { createdAt: 'asc' } as const
+                },
+                _count: {
+                    select: { comments: true, likes: true }
+                },
+                ...(session?.user?.id ? {
+                    likes: {
+                        where: { userId: session.user.id }
+                    }
+                } : {})
+            },
+            orderBy: {
+                createdAt: 'desc'
+            } as const
+        },
+        ...(session?.user?.id ? {
+            members: {
+                where: { userId: session.user.id }
+            },
+            joinRequests: {
+                where: { userId: session.user.id }
+            }
+        } : {})
+    };
+
     // Fetch the community
     const community = await prisma.community.findFirst({
         where: {
@@ -23,41 +65,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                 equals: decodedName,
             }
         },
-        include: {
-            _count: {
-                select: { members: true }
-            },
-            members: session ? {
-                where: { userId: session.user.id }
-            } : false,
-            joinRequests: session ? {
-                where: { userId: session.user.id }
-            } : false,
-            posts: {
-                include: {
-                    author: {
-                        select: { name: true, image: true, role: true }
-                    },
-                    likes: session?.user?.id ? {
-                        where: { userId: session.user.id }
-                    } : false,
-                    comments: {
-                        include: {
-                            author: {
-                                select: { name: true, image: true }
-                            }
-                        },
-                        orderBy: { createdAt: 'asc' }
-                    },
-                    _count: {
-                        select: { comments: true, likes: true }
-                    }
-                },
-                orderBy: {
-                    createdAt: 'desc'
-                }
-            }
-        }
+        include: baseInclude
     });
 
     if (!community) {
