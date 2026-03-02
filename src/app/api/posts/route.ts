@@ -9,22 +9,28 @@ export async function GET(req: Request) {
 
         const userId = session?.user?.id;
 
+        // Build where clause dynamically for Prisma v5 safety
+        const whereClause: any = {
+            OR: [
+                {
+                    community: { isPrivate: false }
+                }
+            ]
+        };
+
+        if (userId) {
+            whereClause.OR.push({
+                community: {
+                    members: {
+                        some: { userId: userId }
+                    }
+                }
+            });
+        }
+
         // Fetch posts balancing global discoverability with private community privacy
         const posts = await prisma.post.findMany({
-            where: {
-                OR: [
-                    {
-                        community: { isPrivate: false }
-                    },
-                    {
-                        community: {
-                            members: {
-                                some: { userId: userId || "unauthenticated" }
-                            }
-                        }
-                    }
-                ]
-            },
+            where: whereClause,
             include: {
                 author: {
                     select: {

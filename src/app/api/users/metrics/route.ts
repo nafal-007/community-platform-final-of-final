@@ -17,7 +17,7 @@ export async function GET() {
 
         const ObjectWithScore = await prisma.post.findMany({
             where: { authorId: session.user.id },
-            include: {
+            select: {
                 _count: {
                     select: { likes: true }
                 }
