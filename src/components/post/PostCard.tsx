@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, ThumbsUp, ShieldCheck, Clock, Send, Loader2, Share2, Check } from "lucide-react";
+import { MessageSquare, ThumbsUp, ShieldCheck, Clock, Send, Loader2, Share2, Check, Trash2 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -90,11 +90,38 @@ export default function PostCard({ post }: { post: any }) {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
+
+    const isAuthor = session?.user?.id === post.authorId;
+    const isGlobalAdmin = session?.user?.role === "ADMIN";
+    const canDelete = isAuthor || isGlobalAdmin;
+
+    const handleDelete = async () => {
+        if (!confirm("Are you sure you want to delete this post?")) return;
+        setDeleteLoading(true);
+        try {
+            const res = await fetch(`/api/posts/${post.id}`, { method: "DELETE" });
+            if (res.ok) {
+                setIsDeleted(true);
+                router.refresh();
+            } else {
+                alert("Failed to delete post.");
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setDeleteLoading(false);
+        }
+    };
+
+    if (isDeleted) return null; // Optimistic hide
+
     return (
         <article className="glass-panel p-5 border border-surface-100 hover:border-surface-200 transition-all group">
             <div className="flex justify-between items-start mb-3">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-surface-100 rounded-full flex items-center justify-center font-bold text-white border border-surface-200 overflow-hidden">
+                    <div className="w-10 h-10 bg-surface-100 rounded-full flex items-center justify-center font-bold text-surface-900 border border-surface-200 overflow-hidden">
                         {post.author?.image ? (
                             <img src={post.author.image} alt={post.author.name} className="w-full h-full object-cover" />
                         ) : (
@@ -103,28 +130,40 @@ export default function PostCard({ post }: { post: any }) {
                     </div>
                     <div>
                         <div className="flex items-center gap-2">
-                            <span className="font-bold text-white text-sm">{post.author?.name || "Anonymous"}</span>
+                            <span className="font-bold text-surface-900 text-sm">{post.author?.name || "Anonymous"}</span>
                             {post.author?.role === 'ADMIN' && (
                                 <ShieldCheck className="w-4 h-4 text-brand-500" />
                             )}
                         </div>
-                        <div className="flex items-center gap-1 text-xs text-slate-500">
+                        <div className="flex items-center gap-1 text-xs text-surface-900/50">
                             <Clock className="w-3 h-3" />
                             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
                         </div>
                     </div>
                 </div>
 
-                {post.validityScore > 0 && (
-                    <div className="px-2.5 py-1 bg-brand-500/10 text-brand-500 rounded-md text-xs font-bold border border-brand-500/20 flex items-center gap-1">
-                        <ShieldCheck className="w-3 h-3" /> +{post.validityScore} Validity
-                    </div>
-                )}
+                <div className="flex items-center gap-2">
+                    {post.validityScore > 0 && (
+                        <div className="px-2.5 py-1 bg-brand-500/10 text-brand-500 rounded-md text-xs font-bold border border-brand-500/20 flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3" /> +{post.validityScore} Validity
+                        </div>
+                    )}
+                    {canDelete && (
+                        <button
+                            onClick={handleDelete}
+                            disabled={deleteLoading}
+                            title="Delete Post"
+                            className="p-1.5 text-surface-900/50 hover:text-red-500 hover:bg-red-500/10 rounded-md transition-colors disabled:opacity-50"
+                        >
+                            {deleteLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                        </button>
+                    )}
+                </div>
             </div>
 
             <div className="pl-13"> {/* Indent to align with text */}
-                <h4 className="text-lg font-bold text-white mb-2 leading-snug">{post.title}</h4>
-                <p className="text-sm text-slate-300 mb-4 whitespace-pre-wrap leading-relaxed">
+                <h4 className="text-lg font-bold text-surface-900 mb-2 leading-snug">{post.title}</h4>
+                <p className="text-sm text-surface-900/80 mb-4 whitespace-pre-wrap leading-relaxed">
                     {post.content}
                 </p>
 
@@ -141,13 +180,13 @@ export default function PostCard({ post }: { post: any }) {
                 )}
 
                 {post.mediaUrl && post.mediaType === "DOCUMENT" && (
-                    <a href={post.mediaUrl} target="_blank" rel="noopener noreferrer" className="w-full mb-4 bg-surface-100 hover:bg-surface-200 border border-surface-200 rounded-xl p-4 flex items-center gap-3 transition-colors text-white font-medium group block">
+                    <a href={post.mediaUrl} target="_blank" rel="noopener noreferrer" className="w-full mb-4 bg-surface-100 hover:bg-surface-200 border border-surface-200 rounded-xl p-4 flex items-center gap-3 transition-colors text-surface-900 font-medium group block">
                         <div className="w-10 h-10 rounded-lg bg-surface-50 text-brand-500 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
                             📎
                         </div>
                         <div>
                             <div className="text-sm">Attached Document</div>
-                            <div className="text-xs text-slate-400 font-normal">Click to view or download</div>
+                            <div className="text-xs text-surface-900/60 font-normal">Click to view or download</div>
                         </div>
                     </a>
                 )}
@@ -155,7 +194,7 @@ export default function PostCard({ post }: { post: any }) {
                 <div className="flex items-center gap-6 mt-4 pt-4 border-t border-surface-100">
                     <button
                         onClick={handleLike}
-                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${liked ? 'text-brand-500' : 'text-slate-400 hover:text-brand-500'}`}
+                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${liked ? 'text-brand-500' : 'text-surface-900/60 hover:text-brand-500'}`}
                     >
                         <ThumbsUp className={`w-4 h-4 ${liked ? 'fill-brand-500' : ''}`} />
                         <span>{likeCount}</span>
@@ -163,15 +202,15 @@ export default function PostCard({ post }: { post: any }) {
 
                     <button
                         onClick={() => setShowComments(!showComments)}
-                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${showComments ? 'text-white' : 'text-slate-400 hover:text-white'}`}
+                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${showComments ? 'text-surface-900' : 'text-surface-900/60 hover:text-surface-900'}`}
                     >
-                        <MessageSquare className={`w-4 h-4 ${showComments ? 'fill-white' : ''}`} />
+                        <MessageSquare className={`w-4 h-4 ${showComments ? 'fill-surface-900' : ''}`} />
                         <span>{commentCount} Comments</span>
                     </button>
 
                     <button
                         onClick={handleShare}
-                        className="flex items-center gap-2 transition-colors text-sm font-medium text-slate-400 hover:text-brand-500 ml-auto"
+                        className="flex items-center gap-2 transition-colors text-sm font-medium text-surface-900/60 hover:text-brand-500 ml-auto"
                         title="Copy post link"
                     >
                         {copied ? <Check className="w-4 h-4 text-brand-500" /> : <Share2 className="w-4 h-4" />}
@@ -188,23 +227,23 @@ export default function PostCard({ post }: { post: any }) {
                             <div className="space-y-3">
                                 {comments.map((comment: any, idx: number) => (
                                     <div key={comment.id || idx} className="flex gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-surface-100 flex-shrink-0 flex items-center justify-center font-bold text-xs text-slate-400 border border-surface-200">
+                                        <div className="w-8 h-8 rounded-full bg-surface-100 flex-shrink-0 flex items-center justify-center font-bold text-xs text-surface-900/60 border border-surface-200">
                                             {comment.author?.name?.[0] || 'U'}
                                         </div>
                                         <div className="flex-1 bg-surface-800/50 p-3 rounded-lg border border-surface-100/50">
                                             <div className="flex items-center justify-between mb-1">
-                                                <span className="font-bold text-white text-xs">{comment.author?.name}</span>
-                                                <span className="text-[10px] text-slate-500">
+                                                <span className="font-bold text-surface-900 text-xs">{comment.author?.name}</span>
+                                                <span className="text-[10px] text-surface-900/50">
                                                     {comment.createdAt ? formatDistanceToNow(new Date(comment.createdAt)) : 'just now'}
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-slate-300">{comment.content}</p>
+                                            <p className="text-sm text-surface-900/80">{comment.content}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <p className="text-sm text-slate-500 italic">No comments yet. Be the first to share your thoughts!</p>
+                            <p className="text-sm text-surface-900/50 italic">No comments yet. Be the first to share your thoughts!</p>
                         )}
 
                         {/* Comment Input */}
@@ -223,7 +262,7 @@ export default function PostCard({ post }: { post: any }) {
                                         placeholder="Write a comment..."
                                         value={commentContent}
                                         onChange={(e) => setCommentContent(e.target.value)}
-                                        className="flex-1 bg-surface-50 border border-surface-100 rounded-full px-4 py-1.5 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors"
+                                        className="flex-1 bg-surface-50 border border-surface-100 rounded-full px-4 py-1.5 text-sm text-surface-900 focus:outline-none focus:border-brand-500 transition-colors"
                                     />
                                     <button
                                         type="submit"
@@ -235,7 +274,7 @@ export default function PostCard({ post }: { post: any }) {
                                 </div>
                             </form>
                         ) : (
-                            <div className="text-sm text-slate-400 mt-4 text-center">
+                            <div className="text-sm text-surface-900/60 mt-4 text-center">
                                 Please <a href="/login" className="text-brand-500 hover:underline">log in</a> to leave a comment.
                             </div>
                         )}

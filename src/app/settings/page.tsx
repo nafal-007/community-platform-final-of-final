@@ -29,7 +29,7 @@ export default function SettingsPage() {
                     <Settings className="w-8 h-8 text-brand-500" />
                     Settings
                 </h1>
-                <p className="text-slate-500">Manage your "US" experience and account preferences.</p>
+                <p className="text-surface-900/50">Manage your "US" experience and account preferences.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -40,7 +40,7 @@ export default function SettingsPage() {
                             key={s.id}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${s.id === "appearance"
                                     ? "bg-brand-500/10 text-brand-500"
-                                    : "text-slate-500 hover:bg-surface-100 hover:text-surface-900"
+                                    : "text-surface-900/50 hover:bg-surface-100 hover:text-surface-900"
                                 }`}
                         >
                             <s.icon className="w-4 h-4" />
@@ -56,11 +56,11 @@ export default function SettingsPage() {
                     <div className="glass-panel p-8 space-y-6">
                         <div>
                             <h2 className="text-xl font-bold text-surface-900 mb-1">Appearance</h2>
-                            <p className="text-sm text-slate-500">Customize how the platform looks for you.</p>
+                            <p className="text-sm text-surface-900/50">Customize how the platform looks for you.</p>
                         </div>
 
                         <div className="space-y-4">
-                            <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Interface Theme</label>
+                            <label className="text-sm font-bold text-surface-900/60 uppercase tracking-wider">Interface Theme</label>
 
                             <div className="grid grid-cols-3 gap-4">
                                 <button
@@ -73,7 +73,7 @@ export default function SettingsPage() {
                                     <div className="w-12 h-12 rounded-full bg-white shadow-inner flex items-center justify-center text-orange-500 border border-slate-100">
                                         <Sun className="w-6 h-6" />
                                     </div>
-                                    <span className={`text-sm font-bold ${theme === "light" ? "text-brand-500" : "text-slate-500"}`}>Light</span>
+                                    <span className={`text-sm font-bold ${theme === "light" ? "text-brand-500" : "text-surface-900/50"}`}>Light</span>
                                 </button>
 
                                 <button
@@ -86,7 +86,7 @@ export default function SettingsPage() {
                                     <div className="w-12 h-12 rounded-full bg-slate-900 shadow-inner flex items-center justify-center text-brand-500">
                                         <Moon className="w-6 h-6" />
                                     </div>
-                                    <span className={`text-sm font-bold ${theme === "dark" ? "text-brand-500" : "text-slate-500"}`}>Dark</span>
+                                    <span className={`text-sm font-bold ${theme === "dark" ? "text-brand-500" : "text-surface-900/50"}`}>Dark</span>
                                 </button>
 
                                 <button
@@ -96,10 +96,10 @@ export default function SettingsPage() {
                                             : "border-surface-100 bg-surface-50 hover:border-surface-100"
                                         }`}
                                 >
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-200 to-slate-800 shadow-inner flex items-center justify-center text-white">
+                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-200 to-slate-800 shadow-inner flex items-center justify-center text-surface-900">
                                         <Monitor className="w-6 h-6" />
                                     </div>
-                                    <span className={`text-sm font-bold ${theme === "system" ? "text-brand-500" : "text-slate-500"}`}>System</span>
+                                    <span className={`text-sm font-bold ${theme === "system" ? "text-brand-500" : "text-surface-900/50"}`}>System</span>
                                 </button>
                             </div>
                         </div>
@@ -107,7 +107,7 @@ export default function SettingsPage() {
                         <div className="pt-6 border-t border-surface-100 flex items-center justify-between">
                             <div>
                                 <h4 className="font-bold text-surface-900">Color Blindness Mode</h4>
-                                <p className="text-xs text-slate-500">Adjust palette for better visibility.</p>
+                                <p className="text-xs text-surface-900/50">Adjust palette for better visibility.</p>
                             </div>
                             <div className="w-12 h-6 bg-surface-100 rounded-full relative">
                                 <div className="absolute left-1 top-1 w-4 h-4 bg-slate-400 rounded-full"></div>

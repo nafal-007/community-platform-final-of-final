@@ -58,17 +58,27 @@ export default function CreatePostForm({ communityId }: { communityId: string })
             let uploadedMediaUrl = undefined;
 
             if (mediaFile) {
+                // 1. Get secure signature from our backend
+                const sigRes = await fetch("/api/upload/signature");
+                if (!sigRes.ok) throw new Error("Failed to get upload signature.");
+                const { signature, timestamp, cloudName, apiKey } = await sigRes.json();
+
+                // 2. Upload directly to Cloudinary from the browser
                 const formData = new FormData();
                 formData.append("file", mediaFile);
+                formData.append("api_key", apiKey);
+                formData.append("timestamp", timestamp);
+                formData.append("signature", signature);
+                formData.append("folder", "community_platform");
 
-                const uploadRes = await fetch("/api/upload", {
+                const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
                     method: "POST",
                     body: formData,
                 });
 
-                if (!uploadRes.ok) throw new Error("Failed to upload media.");
+                if (!uploadRes.ok) throw new Error("Failed to upload media to Cloudinary.");
                 const uploadData = await uploadRes.json();
-                uploadedMediaUrl = uploadData.url;
+                uploadedMediaUrl = uploadData.secure_url;
             }
 
             const res = await fetch(`/api/communities/${communityId}/posts`, {
@@ -98,7 +108,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
 
     return (
         <form onSubmit={handleSubmit} className="glass-panel p-5 bg-surface-900 border border-surface-100 mb-6">
-            <h3 className="font-bold text-lg text-white mb-4">Share with the Community</h3>
+            <h3 className="font-bold text-lg text-surface-900 mb-4">Share with the Community</h3>
 
             {error && (
                 <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg text-sm flex items-center gap-2 mb-4">
@@ -115,7 +125,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                     placeholder="Brief title for your post..."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full bg-surface-50 border border-surface-100 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all font-medium placeholder:text-slate-500"
+                    className="w-full bg-surface-50 border border-surface-100 text-surface-900 px-4 py-2.5 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all font-medium placeholder:text-surface-900/50"
                 />
 
                 <textarea
@@ -125,7 +135,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     rows={4}
-                    className="w-full bg-surface-50 border border-surface-100 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all text-sm resize-none placeholder:text-slate-500"
+                    className="w-full bg-surface-50 border border-surface-100 text-surface-900 px-4 py-3 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all text-sm resize-none placeholder:text-surface-900/50"
                 />
 
                 {mediaPreview && (
@@ -133,14 +143,14 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                         {mediaType === "IMAGE" && <img src={mediaPreview} alt="Preview" className="max-w-full max-h-[400px] object-contain rounded-lg" />}
                         {mediaType === "VIDEO" && <video src={mediaPreview} controls className="max-w-full max-h-[400px] object-contain rounded-lg" />}
                         {mediaType === "DOCUMENT" && (
-                            <div className="text-white flex flex-col items-center justify-center h-32 text-sm font-bold opacity-80">
+                            <div className="text-surface-900 flex flex-col items-center justify-center h-32 text-sm font-bold opacity-80">
                                 📎 {mediaPreview}
                             </div>
                         )}
                         <button
                             type="button"
                             onClick={removeMedia}
-                            className="absolute top-3 right-3 p-1.5 bg-black/60 text-white rounded-full hover:bg-red-500 transition-colors backdrop-blur-sm"
+                            className="absolute top-3 right-3 p-1.5 bg-black/60 text-surface-900 rounded-full hover:bg-red-500 transition-colors backdrop-blur-sm"
                         >
                             <X className="w-4 h-4" />
                         </button>
@@ -159,7 +169,7 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 px-4 py-2 bg-surface-100 hover:bg-surface-200 text-slate-300 font-bold rounded-xl transition-colors text-sm"
+                            className="flex items-center gap-2 px-4 py-2 bg-surface-100 hover:bg-surface-200 text-surface-900/80 font-bold rounded-xl transition-colors text-sm"
                         >
                             <ImageIcon className="w-4 h-4 text-brand-500" />
                             Attach Media

@@ -43,20 +43,20 @@ function SearchResults() {
                     <SearchIcon className="w-8 h-8 text-brand-500" />
                     Search Results
                 </h1>
-                <p className="text-slate-400">Showing results for <span className="text-brand-500 font-bold">"{query}"</span></p>
+                <p className="text-surface-900/60">Showing results for <span className="text-brand-500 font-bold">"{query}"</span></p>
             </div>
 
             {isLoading ? (
                 <div className="flex flex-col items-center justify-center py-20">
                     <Loader2 className="w-10 h-10 text-brand-500 animate-spin mb-4" />
-                    <p className="text-slate-500 font-medium">Scanning US platform...</p>
+                    <p className="text-surface-900/50 font-medium">Scanning US platform...</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     {/* Communities Section */}
                     <div className="space-y-4">
-                        <div className="flex items-center gap-2 text-slate-400 font-bold text-sm uppercase tracking-wider mb-2">
+                        <div className="flex items-center gap-2 text-surface-900/60 font-bold text-sm uppercase tracking-wider mb-2">
                             <Hash className="w-4 h-4" />
                             Communities ({results.communities.length})
                         </div>
@@ -70,14 +70,14 @@ function SearchResults() {
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <h3 className="font-bold text-surface-900 group-hover:text-brand-500 transition-colors uppercase tracking-tight">#{c.name}</h3>
-                                            <p className="text-xs text-slate-500 line-clamp-1">{c.description}</p>
+                                            <p className="text-xs text-surface-900/50 line-clamp-1">{c.description}</p>
                                         </div>
-                                        <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-brand-500 transition-colors" />
+                                        <ArrowRight className="w-4 h-4 text-surface-900/40 group-hover:text-brand-500 transition-colors" />
                                     </div>
                                 </Link>
                             ))
                         ) : (
-                            <div className="glass-panel p-6 text-center border-dashed text-slate-500 text-sm border-surface-100">
+                            <div className="glass-panel p-6 text-center border-dashed text-surface-900/50 text-sm border-surface-100">
                                 No communities found matching your search.
                             </div>
                         )}
@@ -85,7 +85,7 @@ function SearchResults() {
 
                     {/* Users Section */}
                     <div className="space-y-4">
-                        <div className="flex items-center gap-2 text-slate-400 font-bold text-sm uppercase tracking-wider mb-2">
+                        <div className="flex items-center gap-2 text-surface-900/60 font-bold text-sm uppercase tracking-wider mb-2">
                             <Users className="w-4 h-4" />
                             Users ({results.users.length})
                         </div>
@@ -102,14 +102,14 @@ function SearchResults() {
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="font-bold text-surface-900 group-hover:text-brand-500 transition-colors">@{u.username}</h3>
-                                            <p className="text-xs text-slate-500">{u.name}</p>
+                                            <p className="text-xs text-surface-900/50">{u.name}</p>
                                         </div>
-                                        <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-brand-500 transition-colors" />
+                                        <ArrowRight className="w-4 h-4 text-surface-900/40 group-hover:text-brand-500 transition-colors" />
                                     </div>
                                 </Link>
                             ))
                         ) : (
-                            <div className="glass-panel p-6 text-center border-dashed text-slate-500 text-sm border-surface-100">
+                            <div className="glass-panel p-6 text-center border-dashed text-surface-900/50 text-sm border-surface-100">
                                 No users found matching your search.
                             </div>
                         )}

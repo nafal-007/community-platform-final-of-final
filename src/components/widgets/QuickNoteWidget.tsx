@@ -80,13 +80,13 @@ export function QuickNoteWidget() {
                     <BookOpen className="w-5 h-5 text-brand-500" />
                     <h3 className="font-bold text-sm text-surface-900">Quick Note</h3>
                 </div>
-                <div className="text-xs font-bold text-slate-500">
+                <div className="text-xs font-bold text-surface-900/50">
                     {saveStatus === "saving" && <Loader2 className="w-4 h-4 text-brand-500 animate-spin" />}
                     {saveStatus === "saved" && <Check className="w-4 h-4 text-green-500" />}
                 </div>
             </div>
 
-            <p className="text-xs text-slate-400 mb-3">
+            <p className="text-xs text-surface-900/60 mb-3">
                 Jot down ideas while browsing. Auto-saves to your <a href="/notes" className="text-brand-500 hover:underline">Notes History</a>.
             </p>
 

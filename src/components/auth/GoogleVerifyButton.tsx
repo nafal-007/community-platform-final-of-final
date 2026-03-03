@@ -64,7 +64,7 @@ export function GoogleVerifyButton({ onVerified }: GoogleVerifyProps) {
                 )}
 
                 {loading && (
-                    <div className="flex flex-col items-center justify-center p-4 text-slate-400 gap-2">
+                    <div className="flex flex-col items-center justify-center p-4 text-surface-900/60 gap-2">
                         <Loader2 className="w-6 h-6 animate-spin text-brand-500" />
                         <span className="text-sm">Verifying with Google...</span>
                     </div>

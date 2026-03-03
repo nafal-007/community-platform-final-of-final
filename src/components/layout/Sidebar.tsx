@@ -63,7 +63,7 @@ export function Sidebar() {
             {/* User Profile Summary */}
             <div className="p-6 pb-4 border-b border-surface-100 flex flex-col items-center">
                 <Link href={profileLink} className="flex flex-col items-center group">
-                    <div className="w-16 h-16 rounded-full bg-surface-800 border-2 border-surface-100 group-hover:border-brand-500 transition-colors flex items-center justify-center text-white font-black text-2xl shadow-sm mb-3 overflow-hidden">
+                    <div className="w-16 h-16 rounded-full bg-surface-800 border-2 border-surface-100 group-hover:border-brand-500 transition-colors flex items-center justify-center text-surface-900 font-black text-2xl shadow-sm mb-3 overflow-hidden">
                         {user?.image ? (
                             <img src={user.image} alt={user?.name || "User"} className="w-full h-full object-cover" />
                         ) : (
@@ -79,11 +79,11 @@ export function Sidebar() {
                 <div className="flex w-full justify-between px-2 text-center">
                     <div>
                         <p className="font-bold text-surface-900 text-sm">{metrics.communitiesCount}</p>
-                        <p className="text-[10px] text-slate-500 uppercase tracking-wider">Communities</p>
+                        <p className="text-[10px] text-surface-900/50 uppercase tracking-wider">Communities</p>
                     </div>
                     <div>
                         <p className="font-bold text-surface-900 text-sm">{metrics.totalScore}</p>
-                        <p className="text-[10px] text-slate-500 uppercase tracking-wider">Total Score</p>
+                        <p className="text-[10px] text-surface-900/50 uppercase tracking-wider">Total Score</p>
                     </div>
                 </div>
             </div>
@@ -99,12 +99,12 @@ export function Sidebar() {
                                 "flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all duration-200 group",
                                 isActive
                                     ? "bg-brand-500 text-black shadow-sm"
-                                    : "text-slate-500 hover:bg-surface-100 hover:text-surface-900"
+                                    : "text-surface-900/50 hover:bg-surface-100 hover:text-surface-900"
                             )}
                         >
                             <item.icon className={cn(
                                 "w-5 h-5",
-                                isActive ? "text-black" : "text-slate-500 group-hover:text-slate-300"
+                                isActive ? "text-black" : "text-surface-900/50 group-hover:text-surface-900/80"
                             )} />
                             {item.name}
                         </Link>

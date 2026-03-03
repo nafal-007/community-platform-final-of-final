@@ -74,7 +74,7 @@ export default function NotificationsDropdown() {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setOpen(!open)}
-                className="w-10 h-10 rounded-full hover:bg-surface-100 flex items-center justify-center text-slate-400 hover:text-white transition-colors relative"
+                className="w-10 h-10 rounded-full hover:bg-surface-100 flex items-center justify-center text-surface-900/60 hover:text-surface-900 transition-colors relative"
             >
                 <Bell className="w-5 h-5" />
                 {unreadCount > 0 && (
@@ -85,7 +85,7 @@ export default function NotificationsDropdown() {
             {open && (
                 <div className="absolute top-12 right-0 w-80 bg-surface-900 border border-surface-100 rounded-2xl shadow-2xl overflow-hidden z-50 transform origin-top-right transition-all">
                     <div className="p-4 border-b border-surface-100 flex items-center justify-between bg-surface-50">
-                        <h3 className="font-bold text-white">Notifications {unreadCount > 0 && <span className="text-brand-500 bg-brand-500/10 px-2 py-0.5 rounded-full text-xs ml-2">{unreadCount} New</span>}</h3>
+                        <h3 className="font-bold text-surface-900">Notifications {unreadCount > 0 && <span className="text-brand-500 bg-brand-500/10 px-2 py-0.5 rounded-full text-xs ml-2">{unreadCount} New</span>}</h3>
                     </div>
 
                     <div className="max-h-96 overflow-y-auto">
@@ -94,7 +94,7 @@ export default function NotificationsDropdown() {
                                 <Loader2 className="w-6 h-6 animate-spin" />
                             </div>
                         ) : notifications.length === 0 ? (
-                            <div className="p-8 text-center text-slate-400 text-sm">
+                            <div className="p-8 text-center text-surface-900/60 text-sm">
                                 You have no new alerts.
                             </div>
                         ) : (
@@ -106,10 +106,10 @@ export default function NotificationsDropdown() {
                                         className={`p-4 cursor-pointer hover:bg-surface-100 transition-colors flex gap-3 ${!notif.isRead ? 'bg-brand-500/5' : ''}`}
                                     >
                                         <div className="flex-1">
-                                            <p className={`text-sm ${notif.isRead ? 'text-slate-300' : 'text-white font-bold'}`}>
+                                            <p className={`text-sm ${notif.isRead ? 'text-surface-900/80' : 'text-surface-900 font-bold'}`}>
                                                 {notif.message}
                                             </p>
-                                            <span className="text-xs text-slate-500 mt-1 block">
+                                            <span className="text-xs text-surface-900/50 mt-1 block">
                                                 {formatDistanceToNow(new Date(notif.createdAt), { addSuffix: true })}
                                             </span>
                                         </div>

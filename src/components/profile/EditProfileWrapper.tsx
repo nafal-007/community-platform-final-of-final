@@ -18,7 +18,7 @@ export function EditProfileWrapper({ currentBio, currentImage, currentName, curr
         <>
             <button
                 onClick={() => setIsEditModalOpen(true)}
-                className="px-4 py-2 bg-surface-800 hover:bg-surface-700 border border-surface-100 text-white rounded-lg text-sm font-bold transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-surface-800 hover:bg-surface-700 border border-surface-100 text-surface-900 rounded-lg text-sm font-bold transition-colors flex items-center gap-2"
             >
                 <Edit3 className="w-4 h-4" />
                 Edit Profile

@@ -40,13 +40,13 @@ export function Topbar() {
                     </Link>
 
                     <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-sm relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-900/60" />
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Find @username"
-                            className="w-full pl-10 pr-4 py-2 bg-surface-100 border-none rounded-2xl text-sm focus:outline-none focus:ring-1 focus:ring-brand-500 text-surface-900 placeholder:text-slate-500 transition-all font-medium"
+                            className="w-full pl-10 pr-4 py-2 bg-surface-100 border-none rounded-2xl text-sm focus:outline-none focus:ring-1 focus:ring-brand-500 text-surface-900 placeholder:text-surface-900/50 transition-all font-medium"
                         />
                     </form>
                 </div>
@@ -56,10 +56,10 @@ export function Topbar() {
                     <Link href="/" className="p-3 text-brand-500 bg-brand-500/10 rounded-xl transition-all">
                         <Home className="w-5 h-5" />
                     </Link>
-                    <Link href="/communities" className="p-3 text-slate-500 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
+                    <Link href="/communities" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
                         <MessageSquare className="w-5 h-5" />
                     </Link>
-                    <Link href="/settings" className="p-3 text-slate-500 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
+                    <Link href="/settings" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
                         <Settings className="w-5 h-5" />
                     </Link>
                 </div>
@@ -86,7 +86,7 @@ export function Topbar() {
                                 </div>
                                 <button
                                     onClick={() => signOut()}
-                                    className="p-2 text-slate-400 hover:text-red-400 hover:bg-surface-100 rounded-xl transition-all"
+                                    className="p-2 text-surface-900/60 hover:text-red-400 hover:bg-surface-100 rounded-xl transition-all"
                                     title="Logout"
                                 >
                                     <LogOut className="w-4 h-4" />
@@ -95,7 +95,7 @@ export function Topbar() {
                         </div>
                     ) : (
                         <div className="flex items-center gap-3">
-                            <Link href="/login" className="text-sm font-medium text-slate-500 hover:text-surface-900 px-3 py-2 transition-colors">
+                            <Link href="/login" className="text-sm font-medium text-surface-900/50 hover:text-surface-900 px-3 py-2 transition-colors">
                                 Log in
                             </Link>
                             <Link href="/register" className="text-sm font-bold bg-brand-500 hover:bg-brand-600 text-black px-5 py-2 rounded-xl transition-all">

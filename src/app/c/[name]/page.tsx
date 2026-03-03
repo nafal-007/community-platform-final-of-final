@@ -96,14 +96,14 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                             )}
                         </div>
                         <div>
-                            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                            <h1 className="text-2xl font-bold text-surface-900 flex items-center gap-2">
                                 c/{community.name}
-                                {community.isPrivate && <Lock className="w-4 h-4 text-slate-400" />}
+                                {community.isPrivate && <Lock className="w-4 h-4 text-surface-900/60" />}
                             </h1>
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide bg-surface-100 px-2 py-1 rounded-md">{community.category}</span>
+                            <span className="text-xs font-bold text-surface-900/60 uppercase tracking-wide bg-surface-100 px-2 py-1 rounded-md">{community.category}</span>
                         </div>
                     </div>
-                    <p className="text-slate-400 text-sm mt-3">{community.description}</p>
+                    <p className="text-surface-900/60 text-sm mt-3">{community.description}</p>
                 </div>
 
                 {!hasAccess ? (
@@ -111,8 +111,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                         <div className="w-20 h-20 bg-surface-100 rounded-full flex items-center justify-center mb-6 border border-surface-200">
                             <Lock className="w-8 h-8 text-brand-500" />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-3">This Community is Private</h2>
-                        <p className="text-slate-400 max-w-md mb-8">
+                        <h2 className="text-2xl font-bold text-surface-900 mb-3">This Community is Private</h2>
+                        <p className="text-surface-900/60 max-w-md mb-8">
                             Only approved members can view posts, interact, and share updates in c/{community.name}.
                         </p>
                         <JoinCommunityButton
@@ -129,18 +129,18 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                                 <CreatePostForm communityId={community.id} />
                             ) : (
                                 <div className="glass-panel p-6 text-center border-dashed">
-                                    <p className="text-slate-400 font-medium mb-3">You must join to post.</p>
+                                    <p className="text-surface-900/60 font-medium mb-3">You must join to post.</p>
                                     <JoinCommunityButton communityId={community.id} initialState="JOIN" isPrivate={false} />
                                 </div>
                             )
                         ) : (
                             <div className="glass-panel p-6 text-center">
-                                <p className="text-slate-400">Please log in to post in this community.</p>
+                                <p className="text-surface-900/60">Please log in to post in this community.</p>
                             </div>
                         )}
 
                         <div className="flex items-center justify-between mt-8 mb-4">
-                            <h3 className="font-bold text-lg text-white">Community Feed</h3>
+                            <h3 className="font-bold text-lg text-surface-900">Community Feed</h3>
                         </div>
 
                         {/* Posts Feed */}
@@ -148,8 +148,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                             {community.posts.length === 0 ? (
                                 <div className="glass-panel p-12 text-center flex flex-col items-center justify-center border-dashed">
                                     <Info className="w-12 h-12 text-surface-100 mb-4" />
-                                    <h4 className="text-lg font-bold text-white mb-2">No posts yet</h4>
-                                    <p className="text-slate-400 text-sm max-w-sm">
+                                    <h4 className="text-lg font-bold text-surface-900 mb-2">No posts yet</h4>
+                                    <p className="text-surface-900/60 text-sm max-w-sm">
                                         Be the first to share something with c/{community.name}!
                                     </p>
                                 </div>
@@ -174,32 +174,32 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                             community.name[0].toUpperCase()
                         )}
                     </div>
-                    <h2 className="text-xl font-bold text-white mb-1">c/{community.name}</h2>
+                    <h2 className="text-xl font-bold text-surface-900 mb-1">c/{community.name}</h2>
                     <div className="inline-block px-2.5 py-1 bg-surface-100 text-brand-500 text-xs font-bold rounded-lg uppercase tracking-wide mb-4">
                         {community.category}
                     </div>
 
-                    <p className="text-sm text-slate-400 mb-6 pb-6 border-b border-surface-100">
+                    <p className="text-sm text-surface-900/60 mb-6 pb-6 border-b border-surface-100">
                         {community.description}
                     </p>
 
                     <div className="space-y-4">
-                        <div className="flex items-center gap-3 text-slate-300">
+                        <div className="flex items-center gap-3 text-surface-900/80">
                             <Users className="w-5 h-5 text-brand-500" />
                             <div>
-                                <div className="font-bold text-white">{community._count.members}</div>
-                                <div className="text-xs text-slate-500">Members</div>
+                                <div className="font-bold text-surface-900">{community._count.members}</div>
+                                <div className="text-xs text-surface-900/50">Members</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 text-slate-300">
+                        <div className="flex items-center gap-3 text-surface-900/80">
                             {community.isPrivate ? (
                                 <Lock className="w-5 h-5 text-yellow-500" />
                             ) : (
                                 <ShieldCheck className="w-5 h-5 text-brand-500" />
                             )}
                             <div>
-                                <div className="font-bold text-white">{community.isPrivate ? 'Private' : 'Public'}</div>
-                                <div className="text-xs text-slate-500">Access Level</div>
+                                <div className="font-bold text-surface-900">{community.isPrivate ? 'Private' : 'Public'}</div>
+                                <div className="text-xs text-surface-900/50">Access Level</div>
                             </div>
                         </div>
                     </div>

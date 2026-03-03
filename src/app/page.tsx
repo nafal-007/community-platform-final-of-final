@@ -103,7 +103,7 @@ export default function DashboardPage() {
       {/* Joined Communities Bar */}
       {joinedCommunities.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-sm font-bold text-slate-400 mb-3 px-1 uppercase tracking-wider">Your Communities</h2>
+          <h2 className="text-sm font-bold text-surface-900/60 mb-3 px-1 uppercase tracking-wider">Your Communities</h2>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
             {joinedCommunities.map((c: any) => (
               <Link
@@ -120,7 +120,7 @@ export default function DashboardPage() {
                     )}
                   </div>
                 </div>
-                <span className="text-xs text-slate-400 group-hover:text-white transition-colors truncate w-full text-center font-medium">
+                <span className="text-xs text-surface-900/60 group-hover:text-surface-900 transition-colors truncate w-full text-center font-medium">
                   {c.community.name}
                 </span>
               </Link>
@@ -136,15 +136,15 @@ export default function DashboardPage() {
             <Activity className="w-6 h-6 text-brand-500" />
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg">Digital Wellbeing</h3>
-            <p className="text-slate-400 text-sm">Time spent on US today</p>
+            <h3 className="text-surface-900 font-bold text-lg">Digital Wellbeing</h3>
+            <p className="text-surface-900/60 text-sm">Time spent on US today</p>
           </div>
         </div>
 
         <div className="flex flex-col items-end gap-2 text-right">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-2xl font-bold text-white font-mono">{formatTime(totalSecondsToday)}</span>
-            <span className="text-slate-500 text-xs uppercase tracking-wider">/ 2h Limit</span>
+            <span className="text-2xl font-bold text-surface-900 font-mono">{formatTime(totalSecondsToday)}</span>
+            <span className="text-surface-900/50 text-xs uppercase tracking-wider">/ 2h Limit</span>
           </div>
           <div className="w-48 h-2 bg-surface-100 rounded-full overflow-hidden">
             <div
@@ -168,22 +168,22 @@ export default function DashboardPage() {
                 placeholder="Title of your post"
                 value={postTitle}
                 onChange={(e) => setPostTitle(e.target.value)}
-                className="w-full bg-surface-900/50 border border-surface-100 rounded-xl px-4 py-2.5 text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-500/50 transition-all text-sm font-bold"
+                className="w-full bg-surface-900/50 border border-surface-100 rounded-xl px-4 py-2.5 text-surface-900 placeholder:text-surface-900/40 focus:outline-none focus:border-brand-500/50 transition-all text-sm font-bold"
               />
               <textarea
                 placeholder="What happened today? Share structured news, jobs, or updates..."
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
-                className="w-full bg-surface-900/50 border border-surface-100 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 resize-none focus:outline-none focus:border-brand-500/50 transition-all text-sm min-h-[100px] leading-relaxed"
+                className="w-full bg-surface-900/50 border border-surface-100 rounded-xl px-4 py-3 text-surface-900 placeholder:text-surface-900/40 resize-none focus:outline-none focus:border-brand-500/50 transition-all text-sm min-h-[100px] leading-relaxed"
               />
 
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-tighter">Post to:</span>
+                  <span className="text-xs font-bold text-surface-900/50 uppercase tracking-tighter">Post to:</span>
                   <select
                     value={selectedCommunityId}
                     onChange={(e) => setSelectedCommunityId(e.target.value)}
-                    className="flex-1 sm:flex-none bg-surface-800 border border-surface-100 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors font-medium"
+                    className="flex-1 sm:flex-none bg-surface-800 border border-surface-100 rounded-lg px-3 py-1.5 text-xs text-surface-900 focus:outline-none focus:border-brand-500 transition-colors font-medium"
                   >
                     {joinedCommunities.map((c: any) => (
                       <option key={c.community.id} value={c.community.id}>
@@ -209,26 +209,26 @@ export default function DashboardPage() {
 
       {!session && (
         <div className="glass-panel p-8 mb-8 text-center border-dashed border-surface-100">
-          <p className="text-slate-400 mb-4">You must be logged in to share information with the community.</p>
+          <p className="text-surface-900/60 mb-4">You must be logged in to share information with the community.</p>
           <Link href="/login" className="px-6 py-2 bg-brand-500 text-black font-bold rounded-lg text-sm">Log In Now</Link>
         </div>
       )}
 
       {session && joinedCommunities.length === 0 && (
         <div className="glass-panel p-8 mb-8 text-center border-dashed border-surface-100">
-          <Users className="w-10 h-10 text-slate-500 mx-auto mb-3" />
-          <p className="text-slate-400 mb-4 font-medium">Join a community to start posting!</p>
-          <Link href="/communities" className="px-6 py-2 bg-surface-100 text-white font-bold rounded-lg text-sm hover:bg-surface-200 transition-colors">Explore Communities</Link>
+          <Users className="w-10 h-10 text-surface-900/50 mx-auto mb-3" />
+          <p className="text-surface-900/60 mb-4 font-medium">Join a community to start posting!</p>
+          <Link href="/communities" className="px-6 py-2 bg-surface-100 text-surface-900 font-bold rounded-lg text-sm hover:bg-surface-200 transition-colors">Explore Communities</Link>
         </div>
       )}
 
       {/* Main Feed Activity */}
       <div className="space-y-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-lg text-white">Your Feed</h3>
+          <h3 className="font-bold text-lg text-surface-900">Your Feed</h3>
           <div className="flex items-center gap-2 text-sm bg-surface-800 border border-surface-100 rounded-lg p-1">
-            <button className="px-3 py-1 bg-surface-100 text-white rounded-md font-medium">Recent</button>
-            <button className="px-3 py-1 text-slate-500 hover:text-white font-medium transition-colors">Top Rated</button>
+            <button className="px-3 py-1 bg-surface-100 text-surface-900 rounded-md font-medium">Recent</button>
+            <button className="px-3 py-1 text-surface-900/50 hover:text-surface-900 font-medium transition-colors">Top Rated</button>
           </div>
         </div>
 
@@ -248,10 +248,10 @@ export default function DashboardPage() {
           /* Empty Feed State */
           <div className="glass-panel p-12 text-center flex flex-col items-center justify-center border-dashed border-surface-100">
             <div className="w-16 h-16 bg-surface-100 rounded-full flex items-center justify-center mb-4 border border-surface-100">
-              <Users className="w-8 h-8 text-slate-500" />
+              <Users className="w-8 h-8 text-surface-900/50" />
             </div>
-            <h4 className="text-lg font-bold text-white mb-2">Build your network</h4>
-            <p className="text-slate-400 text-sm max-w-sm">
+            <h4 className="text-lg font-bold text-surface-900 mb-2">Build your network</h4>
+            <p className="text-surface-900/60 text-sm max-w-sm">
               Your feed is currently empty. Join communities or follow users to populate your feed with validated information.
             </p>
             <Link href="/communities" className="mt-6 px-6 py-2.5 bg-brand-500 hover:bg-brand-600 text-black rounded-lg font-bold transition-colors text-sm shadow-sm flex items-center gap-2">

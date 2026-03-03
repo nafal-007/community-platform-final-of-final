@@ -107,8 +107,8 @@ export default function RegisterPage() {
                 {/* App Branding */}
                 <div className="flex flex-col items-center mb-10">
                     <Logo className="mb-4" iconSize="w-16 h-16" textSize="text-5xl" dark={true} />
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Create an Account</h1>
-                    <p className="text-slate-400 mt-2">Join US today</p>
+                    <h1 className="text-3xl font-bold text-surface-900 tracking-tight">Create an Account</h1>
+                    <p className="text-surface-900/60 mt-2">Join US today</p>
                 </div>
 
                 {/* Register Form Card */}
@@ -131,13 +131,13 @@ export default function RegisterPage() {
                             {step === 1 ? (
                                 // STEP 1: EMAIL & OTP VERIFICATION
                                 <div className="space-y-6">
-                                    <h2 className="text-lg font-bold text-white mb-2">Step 1: Verify your email</h2>
+                                    <h2 className="text-lg font-bold text-surface-900 mb-2">Step 1: Verify your email</h2>
 
                                     <form onSubmit={otpSent ? handleVerifyOTP : handleSendOTP} className="space-y-4">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-white block">Email Address</label>
+                                            <label className="text-sm font-bold text-surface-900 block">Email Address</label>
                                             <div className="relative">
-                                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                                 <input
                                                     type="email"
                                                     id="email"
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                                                     value={email || ""}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     readOnly={otpSent}
-                                                    className={`w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-slate-600 ${otpSent ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                                    className={`w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-surface-900/40 ${otpSent ? 'opacity-70 cursor-not-allowed' : ''}`}
                                                     placeholder="name@example.com"
                                                 />
                                             </div>
@@ -154,9 +154,9 @@ export default function RegisterPage() {
 
                                         {otpSent && (
                                             <div className="space-y-2 translate-y-2 animate-in fade-in slide-in-from-top-4 duration-300">
-                                                <label className="text-sm font-bold text-white block">6-Digit Code</label>
+                                                <label className="text-sm font-bold text-surface-900 block">6-Digit Code</label>
                                                 <div className="relative">
-                                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                                     <input
                                                         type="text"
                                                         id="otp"
@@ -165,11 +165,11 @@ export default function RegisterPage() {
                                                         value={otp || ""}
                                                         onChange={(e) => setOtp(e.target.value)}
                                                         maxLength={6}
-                                                        className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-brand-500/50 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-lg font-mono tracking-[0.5em] placeholder:tracking-normal placeholder:text-slate-600"
+                                                        className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-brand-500/50 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-lg font-mono tracking-[0.5em] placeholder:tracking-normal placeholder:text-surface-900/40"
                                                         placeholder="123456"
                                                     />
                                                 </div>
-                                                <p className="text-xs text-slate-400">Please check your inbox (and spam folder) for the verification code.</p>
+                                                <p className="text-xs text-surface-900/60">Please check your inbox (and spam folder) for the verification code.</p>
                                             </div>
                                         )}
 
@@ -186,7 +186,7 @@ export default function RegisterPage() {
                                             <button
                                                 type="button"
                                                 onClick={() => { setOtpSent(false); setOtp(""); setError(""); }}
-                                                className="w-full mt-2 text-sm text-slate-400 hover:text-white transition-colors"
+                                                className="w-full mt-2 text-sm text-surface-900/60 hover:text-surface-900 transition-colors"
                                             >
                                                 Change Email Address
                                             </button>
@@ -203,50 +203,50 @@ export default function RegisterPage() {
 
                                     <form onSubmit={handleFinalSubmit} className="space-y-6">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-white block">Full Name</label>
+                                            <label className="text-sm font-bold text-surface-900 block">Full Name</label>
                                             <div className="relative">
-                                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                                 <input
                                                     type="text"
                                                     name="name"
                                                     required
-                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-slate-600"
+                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-surface-900/40"
                                                     placeholder="John Doe"
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-white block">Username</label>
+                                            <label className="text-sm font-bold text-surface-900 block">Username</label>
                                             <div className="relative">
-                                                <div className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-500">@</div>
+                                                <div className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-surface-900/50">@</div>
                                                 <input
                                                     type="text"
                                                     name="username"
                                                     required
                                                     pattern="[a-zA-Z0-9_]+"
                                                     title="Only letters, numbers, and underscores are allowed."
-                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-slate-600"
+                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-surface-900/40"
                                                     placeholder="johndoe"
                                                 />
                                             </div>
-                                            <p className="text-xs text-slate-500">This will be your unique handle.</p>
+                                            <p className="text-xs text-surface-900/50">This will be your unique handle.</p>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-white block">Password</label>
+                                            <label className="text-sm font-bold text-surface-900 block">Password</label>
                                             <div className="relative">
-                                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                                 <input
                                                     type="password"
                                                     name="password"
                                                     required
                                                     minLength={6}
-                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm placeholder:text-slate-600"
+                                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm placeholder:text-surface-900/40"
                                                     placeholder="••••••••"
                                                 />
                                             </div>
-                                            <p className="text-xs text-slate-500">Must be at least 6 characters</p>
+                                            <p className="text-xs text-surface-900/50">Must be at least 6 characters</p>
                                         </div>
 
                                         <button
@@ -265,7 +265,7 @@ export default function RegisterPage() {
 
                     {!success && (
                         <div className="mt-6 flex justify-center text-sm">
-                            <span className="text-slate-400">Already have an account? </span>
+                            <span className="text-surface-900/60">Already have an account? </span>
                             <Link href="/login" className="ml-1 font-bold text-brand-500 hover:text-brand-600">
                                 Log in
                             </Link>

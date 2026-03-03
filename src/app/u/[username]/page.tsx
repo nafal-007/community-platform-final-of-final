@@ -44,7 +44,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
     const isOwner = (session?.user as any)?.username === user.username;
 
     return (
-        <div className="w-full h-full p-6 text-white overflow-y-auto custom-scrollbar">
+        <div className="w-full h-full p-6 text-surface-900 overflow-y-auto custom-scrollbar">
             <div className="max-w-4xl mx-auto space-y-6">
 
                 {/* Profile Header */}
@@ -81,13 +81,13 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                                 )}
                             </div>
 
-                            <p className="text-slate-300 max-w-2xl leading-relaxed">
+                            <p className="text-surface-900/80 max-w-2xl leading-relaxed">
                                 {user.bio || "This user hasn't added a bio yet."}
                             </p>
                         </div>
                     </div>
 
-                    <div className="relative z-10 flex flex-wrap gap-4 mt-8 pt-6 border-t border-surface-100 text-sm text-slate-400">
+                    <div className="relative z-10 flex flex-wrap gap-4 mt-8 pt-6 border-t border-surface-100 text-sm text-surface-900/60">
                         <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             <span>Joined {format(new Date(user.createdAt), 'MMMM yyyy')}</span>
@@ -108,12 +108,12 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                             </h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center p-3 bg-surface-800 rounded-lg border border-surface-100">
-                                    <span className="text-slate-400 font-medium">Posts</span>
-                                    <span className="text-white font-bold">{user._count.posts}</span>
+                                    <span className="text-surface-900/60 font-medium">Posts</span>
+                                    <span className="text-surface-900 font-bold">{user._count.posts}</span>
                                 </div>
                                 <div className="flex justify-between items-center p-3 bg-surface-800 rounded-lg border border-surface-100">
-                                    <span className="text-slate-400 font-medium">Communities</span>
-                                    <span className="text-white font-bold">{user._count.communities}</span>
+                                    <span className="text-surface-900/60 font-medium">Communities</span>
+                                    <span className="text-surface-900 font-bold">{user._count.communities}</span>
                                 </div>
                             </div>
                         </div>
@@ -121,11 +121,11 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                         <div className="glass-panel p-6">
                             <h3 className="font-bold text-lg mb-4">Joined Communities</h3>
                             {user.communities.length === 0 ? (
-                                <p className="text-sm text-slate-400">Not a member of any communities yet.</p>
+                                <p className="text-sm text-surface-900/60">Not a member of any communities yet.</p>
                             ) : (
                                 <div className="flex flex-wrap gap-2">
                                     {user.communities.map((c) => (
-                                        <a href={`/c/${c.community.name}`} key={c.community.id} className="px-3 py-1.5 bg-surface-800 hover:bg-surface-100 border border-surface-100 rounded-lg text-sm text-slate-300 transition-colors">
+                                        <a href={`/c/${c.community.name}`} key={c.community.id} className="px-3 py-1.5 bg-surface-800 hover:bg-surface-100 border border-surface-100 rounded-lg text-sm text-surface-900/80 transition-colors">
                                             {c.community.name}
                                         </a>
                                     ))}
@@ -140,28 +140,28 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                         {user.posts.length === 0 ? (
                             <div className="glass-panel p-10 text-center">
                                 <MessageSquare className="w-12 h-12 text-surface-100 mx-auto mb-4" />
-                                <h3 className="text-lg font-bold text-white mb-2">No posts yet</h3>
-                                <p className="text-slate-400 text-sm">When {user.name} posts in a community, it will appear here.</p>
+                                <h3 className="text-lg font-bold text-surface-900 mb-2">No posts yet</h3>
+                                <p className="text-surface-900/60 text-sm">When {user.name} posts in a community, it will appear here.</p>
                             </div>
                         ) : (
                             user.posts.map((post) => (
                                 <div key={post.id} className="glass-panel p-5 transition-colors hover:border-surface-200">
-                                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-surface-900/50 mb-3">
                                         <span>Posted in</span>
                                         <a href={`/c/${post.community.name}`} className="text-brand-500 hover:underline">{post.community.name}</a>
                                         <span className="px-1.5">•</span>
                                         <span>{format(new Date(post.createdAt), 'MMM dd, yyyy')}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
-                                    <p className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+                                    <h3 className="text-xl font-bold text-surface-900 mb-2">{post.title}</h3>
+                                    <p className="text-surface-900/80 text-sm leading-relaxed mb-4 line-clamp-3">
                                         {post.content}
                                     </p>
                                     <div className="flex gap-4">
-                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-800 text-slate-300 text-xs font-bold">
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-800 text-surface-900/80 text-xs font-bold">
                                             <Heart className="w-4 h-4 text-brand-500" />
                                             {post._count.likes}
                                         </div>
-                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-800 text-slate-300 text-xs font-bold">
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-800 text-surface-900/80 text-xs font-bold">
                                             <MessageSquare className="w-4 h-4 text-brand-500" />
                                             {post._count.comments}
                                         </div>

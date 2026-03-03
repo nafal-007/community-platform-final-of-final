@@ -42,8 +42,8 @@ export default function LoginPage() {
                 {/* App Branding */}
                 <div className="flex flex-col items-center mb-10">
                     <Logo className="mb-4" iconSize="w-16 h-16" textSize="text-5xl" dark={true} />
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Welcome back</h1>
-                    <p className="text-slate-400 mt-2">Log in to your US account</p>
+                    <h1 className="text-3xl font-bold text-surface-900 tracking-tight">Welcome back</h1>
+                    <p className="text-surface-900/60 mt-2">Log in to your US account</p>
                 </div>
 
                 {/* Login Form Card */}
@@ -57,14 +57,14 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-white block">Email Address</label>
+                            <label className="text-sm font-bold text-surface-900 block">Email Address</label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                 <input
                                     type="email"
                                     name="email"
                                     required
-                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-slate-600"
+                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm mb-1 placeholder:text-surface-900/40"
                                     placeholder="name@example.com"
                                 />
                             </div>
@@ -72,16 +72,16 @@ export default function LoginPage() {
 
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                                <label className="text-sm font-bold text-white block">Password</label>
+                                <label className="text-sm font-bold text-surface-900 block">Password</label>
                                 <Link href="#" className="text-xs font-bold text-brand-500 hover:text-brand-600">Forgot password?</Link>
                             </div>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/50" />
                                 <input
                                     type="password"
                                     name="password"
                                     required
-                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-white rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm placeholder:text-slate-600"
+                                    className="w-full pl-12 pr-4 py-3 bg-surface-50 border border-surface-100 text-surface-900 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm placeholder:text-surface-900/40"
                                     placeholder="••••••••"
                                 />
                             </div>
@@ -102,12 +102,12 @@ export default function LoginPage() {
                             <div className="w-full border-t border-slate-200"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-slate-500">Or continue with</span>
+                            <span className="px-2 bg-white text-surface-900/50">Or continue with</span>
                         </div>
                     </div>
 
                     <div className="mt-6 flex justify-center text-sm">
-                        <span className="text-slate-400">Don&apos;t have an account? </span>
+                        <span className="text-surface-900/60">Don&apos;t have an account? </span>
                         <Link href="/register" className="ml-1 font-bold text-brand-500 hover:text-brand-600">
                             Sign up
                         </Link>

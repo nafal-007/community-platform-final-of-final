@@ -43,7 +43,7 @@ export default function JoinCommunityButton({ communityId, initialState, isPriva
 
     if (status === "PENDING") {
         return (
-            <button disabled className="w-full py-2.5 bg-surface-50 border border-surface-100 text-slate-400 font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-not-allowed">
+            <button disabled className="w-full py-2.5 bg-surface-50 border border-surface-100 text-surface-900/60 font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-not-allowed">
                 <Clock className="w-4 h-4" /> Request Pending
             </button>
         );

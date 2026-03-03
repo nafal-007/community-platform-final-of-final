@@ -36,7 +36,7 @@ export default function LeaveCommunityButton({ communityId }: LeaveButtonProps) 
 
     if (status === "LOADING") {
         return (
-            <button disabled className="w-full py-2.5 bg-surface-50 border border-surface-100 text-slate-400 font-bold rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
+            <button disabled className="w-full py-2.5 bg-surface-50 border border-surface-100 text-surface-900/60 font-bold rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
                 <Loader2 className="w-5 h-5 animate-spin" /> Leaving...
             </button>
         );

@@ -181,7 +181,7 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
             </Link>
 
             <div className="glass-panel p-8">
-                <h1 className="text-2xl font-bold text-white mb-6">Community Settings</h1>
+                <h1 className="text-2xl font-bold text-surface-900 mb-6">Community Settings</h1>
 
                 {error && (
                     <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl text-sm flex items-center gap-2 mb-6 font-bold">
@@ -193,7 +193,7 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                 <div className="space-y-8">
                     {/* Avatar Upload */}
                     <div>
-                        <label className="block text-sm font-bold text-slate-300 mb-4">Community Avatar Profile Picture</label>
+                        <label className="block text-sm font-bold text-surface-900/80 mb-4">Community Avatar Profile Picture</label>
                         <div className="flex items-center gap-6">
                             <div
                                 className="relative w-32 h-32 group cursor-pointer"
@@ -206,7 +206,7 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                                         decodedName[0].toUpperCase()
                                     )}
                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
-                                        <Upload className="w-8 h-8 text-white mb-1" />
+                                        <Upload className="w-8 h-8 text-surface-900 mb-1" />
                                     </div>
                                 </div>
                                 <input
@@ -218,8 +218,8 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                                 />
                             </div>
                             <div>
-                                <h3 className="text-white font-bold mb-1">Upload a custom logo</h3>
-                                <p className="text-slate-400 text-sm max-w-sm">
+                                <h3 className="text-surface-900 font-bold mb-1">Upload a custom logo</h3>
+                                <p className="text-surface-900/60 text-sm max-w-sm">
                                     A memorable logo makes your community stand out on the global feed. Recommended format: PNG or JPG, max 5MB.
                                 </p>
                             </div>
@@ -228,16 +228,16 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
 
                     {/* Member Management */}
                     <div className="pt-6 border-t border-surface-100">
-                        <label className="block text-sm font-bold text-slate-300 mb-4">Member Management</label>
+                        <label className="block text-sm font-bold text-surface-900/80 mb-4">Member Management</label>
                         <div className="bg-surface-800 border border-surface-100 rounded-xl overflow-hidden">
                             {members.length === 0 ? (
-                                <div className="p-6 text-center text-slate-400 text-sm">No members found.</div>
+                                <div className="p-6 text-center text-surface-900/60 text-sm">No members found.</div>
                             ) : (
                                 <div className="divide-y divide-surface-100 max-h-[400px] overflow-y-auto custom-scrollbar">
                                     {members.map(member => (
                                         <div key={member.id} className="p-4 flex items-center justify-between hover:bg-surface-800/80 transition-colors">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-surface-100 flex items-center justify-center font-bold text-slate-400 overflow-hidden border border-surface-200">
+                                                <div className="w-10 h-10 rounded-full bg-surface-100 flex items-center justify-center font-bold text-surface-900/60 overflow-hidden border border-surface-200">
                                                     {member.user.image ? (
                                                         <img src={member.user.image} alt={member.user.name} className="w-full h-full object-cover" />
                                                     ) : (
@@ -245,11 +245,11 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-white text-sm flex items-center gap-2">
+                                                    <div className="font-bold text-surface-900 text-sm flex items-center gap-2">
                                                         {member.user.name}
                                                         {member.role === "ADMIN" && <span className="text-[10px] bg-brand-500/10 text-brand-500 px-1.5 py-0.5 rounded uppercase tracking-wider">Admin</span>}
                                                     </div>
-                                                    <div className="text-xs text-slate-500">{member.user.email}</div>
+                                                    <div className="text-xs text-surface-900/50">{member.user.email}</div>
                                                 </div>
                                             </div>
 
@@ -277,15 +277,15 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                         </h3>
                         <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-6 flex items-center justify-between">
                             <div>
-                                <h4 className="font-bold text-white mb-1">Delete Community</h4>
-                                <p className="text-sm text-slate-400 max-w-md">
+                                <h4 className="font-bold text-surface-900 mb-1">Delete Community</h4>
+                                <p className="text-sm text-surface-900/60 max-w-md">
                                     Permanently delete this community, all of its posts, members, and data. This action is irreversible.
                                 </p>
                             </div>
                             <button
                                 onClick={handleDeleteCommunity}
                                 disabled={saving}
-                                className="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl transition-colors flex items-center gap-2 disabled:opacity-50"
+                                className="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-surface-900 font-bold rounded-xl transition-colors flex items-center gap-2 disabled:opacity-50"
                             >
                                 <Trash className="w-4 h-4" /> Delete Community
                             </button>
@@ -293,7 +293,7 @@ export default function CommunitySettingsPage({ params }: { params: Promise<{ na
                     </div>
 
                     <div className="pt-6 border-t border-surface-100 flex justify-end gap-4">
-                        <Link href={`/c/${encodeURIComponent(decodedName)}`} className="px-6 py-2.5 bg-surface-100 hover:bg-surface-200 text-white font-bold rounded-xl transition-colors">
+                        <Link href={`/c/${encodeURIComponent(decodedName)}`} className="px-6 py-2.5 bg-surface-100 hover:bg-surface-200 text-surface-900 font-bold rounded-xl transition-colors">
                             Cancel
                         </Link>
                         <button

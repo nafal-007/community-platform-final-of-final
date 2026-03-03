@@ -139,7 +139,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
                                     placeholder="Note Title (Optional)"
-                                    className="bg-transparent text-xl font-bold text-white placeholder-slate-500 focus:outline-none w-full"
+                                    className="bg-transparent text-xl font-bold text-surface-900 placeholder-slate-500 focus:outline-none w-full"
                                 />
                                 <p className="text-xs text-brand-500 font-bold uppercase tracking-wide mt-1">
                                     {currentNoteId
@@ -154,7 +154,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                                     <button
                                         onClick={handleSummarize}
                                         disabled={isSummarizing || !content.trim()}
-                                        className="flex items-center gap-2 px-4 py-2.5 bg-surface-800 border border-surface-100 hover:bg-surface-100 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2.5 bg-surface-800 border border-surface-100 hover:bg-surface-100 disabled:opacity-50 disabled:cursor-not-allowed text-surface-900 text-sm font-bold rounded-xl transition-colors"
                                     >
                                         {isSummarizing ? (
                                             <Loader2 className="w-4 h-4 text-brand-500 animate-spin" />
@@ -204,12 +204,12 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                                     AI Generated Summary
                                 </h4>
                                 {isSummarizing ? (
-                                    <div className="flex items-center gap-3 text-slate-400 text-sm">
+                                    <div className="flex items-center gap-3 text-surface-900/60 text-sm">
                                         <Loader2 className="w-4 h-4 animate-spin text-brand-500" />
                                         <span>Gemini is reading your notes and extracting concepts...</span>
                                     </div>
                                 ) : (
-                                    <div className="text-sm text-slate-300 leading-relaxed font-mono whitespace-pre-wrap">
+                                    <div className="text-sm text-surface-900/80 leading-relaxed font-mono whitespace-pre-wrap">
                                         {aiSummary}
                                     </div>
                                 )}
@@ -223,7 +223,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder="Start writing your learning notes, concepts, or ideas here..."
-                            className="w-full h-full min-h-[400px] bg-surface-50/50 border border-surface-100/50 rounded-xl p-4 text-surface-900 placeholder:text-slate-500 focus:outline-none focus:border-brand-500/30 resize-none font-mono text-sm leading-relaxed custom-scrollbar transition-all"
+                            className="w-full h-full min-h-[400px] bg-surface-50/50 border border-surface-100/50 rounded-xl p-4 text-surface-900 placeholder:text-surface-900/50 focus:outline-none focus:border-brand-500/30 resize-none font-mono text-sm leading-relaxed custom-scrollbar transition-all"
                         />
                     </div>
                 </div>
@@ -233,7 +233,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
             <div className="w-full lg:w-96 flex flex-col mt-6 lg:mt-0">
                 <div className="glass-panel p-6 sticky top-6 max-h-[calc(100vh-100px)] flex flex-col overflow-hidden">
                     <div className="flex items-center justify-between mb-6 shrink-0">
-                        <h3 className="font-bold text-lg text-white flex items-center gap-2">
+                        <h3 className="font-bold text-lg text-surface-900 flex items-center gap-2">
                             <Calendar className="w-5 h-5 text-brand-500" />
                             Notes History
                         </h3>
@@ -249,7 +249,7 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                     {notes.length === 0 ? (
                         <div className="text-center py-8">
                             <BookOpen className="w-10 h-10 text-surface-100 mx-auto mb-3" />
-                            <p className="text-sm text-slate-400">Your past notes will appear here.</p>
+                            <p className="text-sm text-surface-900/60">Your past notes will appear here.</p>
                         </div>
                     ) : (
                         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3 pb-6">
@@ -263,14 +263,14 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                                         }`}
                                 >
                                     <div className="flex items-start justify-between mb-2">
-                                        <span className={`text-sm font-bold transition-colors line-clamp-1 pr-2 ${currentNoteId === note.id ? "text-brand-500" : "text-white group-hover:text-brand-500"}`}>
+                                        <span className={`text-sm font-bold transition-colors line-clamp-1 pr-2 ${currentNoteId === note.id ? "text-brand-500" : "text-surface-900 group-hover:text-brand-500"}`}>
                                             {note.title || "Untitled Note"}
                                         </span>
                                     </div>
-                                    <p className="text-xs text-slate-400 mb-2 truncate">
+                                    <p className="text-xs text-surface-900/60 mb-2 truncate">
                                         {format(new Date(note.date), "MMM dd, yyyy • h:mm a")}
                                     </p>
-                                    <p className="text-sm text-slate-400 line-clamp-2 leading-relaxed">
+                                    <p className="text-sm text-surface-900/60 line-clamp-2 leading-relaxed">
                                         {note.rawContent || "Empty note..."}
                                     </p>
                                 </div>
