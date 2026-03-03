@@ -7,6 +7,7 @@ import Link from "next/link";
 
 function SearchResults() {
     const searchParams = useSearchParams();
+    const [inputValue, setInputValue] = useState(searchParams.get("q") || "");
     const query = searchParams.get("q") || "";
     const [results, setResults] = useState<{ communities: any[], users: any[] }>({ communities: [], users: [] });
     const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +15,7 @@ function SearchResults() {
     useEffect(() => {
         if (query.trim()) {
             handleSearch(query);
+            setInputValue(query);
         }
     }, [query]);
 
@@ -36,14 +38,43 @@ function SearchResults() {
         }
     };
 
+    const onSearchSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (inputValue.trim()) {
+            window.location.href = `/search?q=${encodeURIComponent(inputValue.trim())}`;
+        }
+    };
+
     return (
-        <div className="max-w-4xl mx-auto py-10 px-6">
-            <div className="mb-10">
-                <h1 className="text-3xl font-bold text-surface-900 mb-2 flex items-center gap-3">
-                    <SearchIcon className="w-8 h-8 text-brand-500" />
-                    Search Results
+        <div className="max-w-4xl mx-auto py-6 md:py-10 px-4 md:px-6 mb-20">
+            <div className="mb-8">
+                <h1 className="text-2xl md:text-3xl font-bold text-surface-900 mb-6 flex items-center gap-3">
+                    <SearchIcon className="w-6 h-6 md:w-8 md:h-8 text-brand-500" />
+                    Search US
                 </h1>
-                <p className="text-surface-900/60">Showing results for <span className="text-brand-500 font-bold">"{query}"</span></p>
+
+                <form onSubmit={onSearchSubmit} className="relative mb-6">
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="Search communities or people..."
+                        className="w-full bg-surface-50/50 border border-surface-100 rounded-2xl py-4 pl-12 pr-4 text-surface-900 focus:outline-none focus:border-brand-500/50 transition-all font-medium"
+                    />
+                    <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-900/40" />
+                    <button
+                        type="submit"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-brand-500 text-black rounded-xl hover:bg-brand-600 transition-colors"
+                    >
+                        <ArrowRight className="w-4 h-4" />
+                    </button>
+                </form>
+
+                {query ? (
+                    <p className="text-surface-900/60 text-sm">Showing results for <span className="text-brand-500 font-bold">"{query}"</span></p>
+                ) : (
+                    <p className="text-surface-900/60 text-sm italic">Type something to explore our community...</p>
+                )}
             </div>
 
             {isLoading ? (

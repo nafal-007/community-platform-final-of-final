@@ -8,7 +8,8 @@ import {
     Search,
     User,
     Settings,
-    PlusCircle
+    PlusCircle,
+    BookOpen
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
@@ -16,8 +17,8 @@ import { useSession } from "next-auth/react";
 const mobileNavItems = [
     { name: "Home", href: "/", icon: Home },
     { name: "Explore", href: "/communities", icon: Users },
+    { name: "Notes", href: "/notes", icon: BookOpen },
     { name: "Search", href: "/search", icon: Search },
-    { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function MobileNav() {

@@ -102,15 +102,42 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                                 community.name[0].toUpperCase()
                             )}
                         </div>
-                        <div>
+                        <div className="flex-1">
                             <h1 className="text-2xl font-bold text-surface-900 flex items-center gap-2">
                                 c/{community.name}
                                 {community.isPrivate && <Lock className="w-4 h-4 text-surface-900/60" />}
                             </h1>
-                            <span className="text-xs font-bold text-surface-900/60 uppercase tracking-wide bg-surface-100 px-2 py-1 rounded-md">{community.category}</span>
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="text-[10px] font-bold text-surface-900/60 uppercase tracking-widest bg-surface-100 px-2 py-0.5 rounded-md border border-surface-200">{community.category}</span>
+                                <span className="text-[10px] font-bold text-brand-500 uppercase tracking-widest bg-brand-500/10 px-2 py-0.5 rounded-md border border-brand-500/20">{community._count.members} Members</span>
+                            </div>
                         </div>
                     </div>
-                    <p className="text-surface-900/60 text-sm mt-3">{community.description}</p>
+                    <p className="text-surface-900/60 text-sm mt-3 mb-4">{community.description}</p>
+
+                    {/* Mobile Action Buttons */}
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-surface-100/50">
+                        {session && (
+                            isMember ? (
+                                <LeaveCommunityButton communityId={community.id} />
+                            ) : (
+                                <JoinCommunityButton
+                                    communityId={community.id}
+                                    initialState={existingRequest ? (existingRequest === "PENDING" ? "PENDING" : "JOIN") : "JOIN"}
+                                    isPrivate={community.isPrivate}
+                                />
+                            )
+                        )}
+
+                        {isAdmin && (
+                            <Link
+                                href={`/c/${encodeURIComponent(decodedName)}/settings`}
+                                className="px-4 py-2 bg-surface-800 hover:bg-surface-700 text-surface-900 text-xs font-bold rounded-lg flex items-center gap-2 transition-all border border-surface-100"
+                            >
+                                <Settings className="w-3.5 h-3.5" /> Manage
+                            </Link>
+                        )}
+                    </div>
                 </div>
 
                 {!hasAccess ? (
