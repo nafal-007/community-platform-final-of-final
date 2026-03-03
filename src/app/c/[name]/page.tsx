@@ -137,6 +137,27 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                                 <Settings className="w-3.5 h-3.5" /> Manage
                             </Link>
                         )}
+
+                        {/* Mobile Members Toggle (Only visible on small screens) */}
+                        <div className="w-full mt-2">
+                            <details className="w-full group">
+                                <summary className="flex items-center justify-between p-3 bg-surface-100/50 rounded-xl cursor-pointer list-none hover:bg-surface-100 transition-colors border border-surface-200/50">
+                                    <div className="flex items-center gap-2">
+                                        <Users className="w-4 h-4 text-brand-500" />
+                                        <span className="text-sm font-bold text-surface-900">Community Members</span>
+                                    </div>
+                                    <span className="text-xs text-surface-900/40 font-bold group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div className="mt-2 p-1 bg-surface-50/30 rounded-2xl border border-surface-100/50 overflow-hidden">
+                                    <CommunityMemberList
+                                        communityId={community.id}
+                                        members={membersList as any}
+                                        isAdmin={isAdmin}
+                                        currentUserId={session?.user?.id}
+                                    />
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
 
