@@ -128,47 +128,49 @@ export default function DailyNotesClient({ pastNotes: initialPastNotes }: { past
                 <div className="glass-panel flex flex-col h-full border-t-4 border-t-brand-500 rounded-none rounded-b-2xl overflow-x-hidden overflow-y-auto custom-scrollbar">
 
                     {/* Header */}
-                    <div className="p-6 bg-surface-800/50 border-b border-surface-100 flex items-center justify-between">
-                        <div className="flex items-center gap-4 w-full">
-                            <div className="w-12 h-12 shrink-0 bg-brand-500/10 rounded-xl flex items-center justify-center text-brand-500">
-                                <BookOpen className="w-6 h-6" />
-                            </div>
-                            <div className="flex-1">
-                                <input
-                                    type="text"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    placeholder="Note Title (Optional)"
-                                    className="bg-transparent text-xl font-bold text-surface-900 placeholder-slate-500 focus:outline-none w-full"
-                                />
-                                <p className="text-xs text-brand-500 font-bold uppercase tracking-wide mt-1">
-                                    {currentNoteId
-                                        ? format(new Date(notes.find(n => n.id === currentNoteId)?.date || new Date()), "EEEE, MMMM do, yyyy")
-                                        : "New Unsaved Note"
-                                    }
-                                </p>
+                    <div className="p-4 md:p-6 bg-surface-800/50 border-b border-surface-100">
+                        <div className="flex flex-col gap-4">
+                            <div className="flex items-center gap-4 w-full">
+                                <div className="hidden sm:flex w-12 h-12 shrink-0 bg-brand-500/10 rounded-xl items-center justify-center text-brand-500">
+                                    <BookOpen className="w-6 h-6" />
+                                </div>
+                                <div className="flex-1">
+                                    <input
+                                        type="text"
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                        placeholder="Note Title (Optional)"
+                                        className="bg-transparent text-lg md:text-xl font-bold text-surface-900 placeholder-slate-500 focus:outline-none w-full"
+                                    />
+                                    <p className="text-[10px] md:text-xs text-brand-500 font-bold uppercase tracking-wide mt-1">
+                                        {currentNoteId
+                                            ? format(new Date(notes.find(n => n.id === currentNoteId)?.date || new Date()), "EEEE, MMMM do, yyyy")
+                                            : "New Unsaved Note"
+                                        }
+                                    </p>
+                                </div>
                             </div>
 
-                            <div className="flex items-center gap-2 shrink-0">
+                            <div className="flex flex-wrap items-center gap-2 w-full">
                                 {currentNoteId && (
                                     <button
                                         onClick={handleSummarize}
                                         disabled={isSummarizing || !content.trim()}
-                                        className="flex items-center gap-2 px-4 py-2.5 bg-surface-800 border border-surface-100 hover:bg-surface-100 disabled:opacity-50 disabled:cursor-not-allowed text-surface-900 text-sm font-bold rounded-xl transition-colors"
+                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-surface-800 border border-surface-100 hover:bg-surface-100 disabled:opacity-50 disabled:cursor-not-allowed text-surface-900 text-xs md:text-sm font-bold rounded-xl transition-colors"
                                     >
                                         {isSummarizing ? (
                                             <Loader2 className="w-4 h-4 text-brand-500 animate-spin" />
                                         ) : (
                                             <span className="text-xl leading-none">✨</span>
                                         )}
-                                        {isSummarizing ? "Thinking..." : "Summarize with AI"}
+                                        {isSummarizing ? "Thinking..." : "Summarize"}
                                     </button>
                                 )}
 
                                 <button
                                     onClick={() => handleSave(false)}
                                     disabled={isSaving || (!content.trim() && !title.trim())}
-                                    className="flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold text-sm rounded-xl transition-colors shadow-lg shadow-brand-500/20"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold text-xs md:text-sm rounded-xl transition-colors shadow-lg shadow-brand-500/20"
                                 >
                                     {isSaving ? (
                                         <Loader2 className="w-4 h-4 animate-spin" />

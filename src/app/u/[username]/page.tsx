@@ -51,9 +51,9 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                 <div className="glass-panel p-8 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-brand-900 via-surface-900 to-brand-900 opacity-50 z-0 border-b border-surface-100"></div>
 
-                    <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start md:items-end mt-12">
+                    <div className="relative z-10 flex flex-col md:flex-row gap-4 md:gap-6 items-center md:items-end mt-8 md:mt-12">
                         {/* Avatar */}
-                        <div className="w-32 h-32 rounded-full border-4 border-surface-50 bg-surface-800 flex items-center justify-center text-4xl font-black shadow-xl overflow-hidden shrink-0">
+                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-50 bg-surface-800 flex items-center justify-center text-3xl md:text-4xl font-black shadow-xl overflow-hidden shrink-0">
                             {user.image ? (
                                 <img src={user.image} alt={user.name || "User"} className="w-full h-full object-cover" />
                             ) : (

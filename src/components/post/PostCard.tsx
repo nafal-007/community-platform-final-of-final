@@ -191,29 +191,32 @@ export default function PostCard({ post }: { post: any }) {
                     </a>
                 )}
 
-                <div className="flex items-center gap-6 mt-4 pt-4 border-t border-surface-100">
-                    <button
-                        onClick={handleLike}
-                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${liked ? 'text-brand-500' : 'text-surface-900/60 hover:text-brand-500'}`}
-                    >
-                        <ThumbsUp className={`w-4 h-4 ${liked ? 'fill-brand-500' : ''}`} />
-                        <span>{likeCount}</span>
-                    </button>
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-surface-100">
+                    <div className="flex items-center gap-4 md:gap-6">
+                        <button
+                            onClick={handleLike}
+                            className={`flex items-center gap-2 py-2 px-1 transition-colors text-sm font-medium ${liked ? 'text-brand-500' : 'text-surface-900/60 hover:text-brand-500'}`}
+                        >
+                            <ThumbsUp className={`w-4 h-4 md:w-5 md:h-5 ${liked ? 'fill-brand-500' : ''}`} />
+                            <span>{likeCount}</span>
+                        </button>
 
-                    <button
-                        onClick={() => setShowComments(!showComments)}
-                        className={`flex items-center gap-2 transition-colors text-sm font-medium ${showComments ? 'text-surface-900' : 'text-surface-900/60 hover:text-surface-900'}`}
-                    >
-                        <MessageSquare className={`w-4 h-4 ${showComments ? 'fill-surface-900' : ''}`} />
-                        <span>{commentCount} Comments</span>
-                    </button>
+                        <button
+                            onClick={() => setShowComments(!showComments)}
+                            className={`flex items-center gap-2 py-2 px-1 transition-colors text-sm font-medium ${showComments ? 'text-surface-900' : 'text-surface-900/60 hover:text-surface-900'}`}
+                        >
+                            <MessageSquare className={`w-4 h-4 md:w-5 md:h-5 ${showComments ? 'fill-surface-900' : ''}`} />
+                            <span className="hidden sm:inline">{commentCount} Comments</span>
+                            <span className="sm:hidden">{commentCount}</span>
+                        </button>
+                    </div>
 
                     <button
                         onClick={handleShare}
-                        className="flex items-center gap-2 transition-colors text-sm font-medium text-surface-900/60 hover:text-brand-500 ml-auto"
+                        className="flex items-center gap-2 py-2 px-2 transition-colors text-sm font-medium text-surface-900/60 hover:text-brand-500"
                         title="Copy post link"
                     >
-                        {copied ? <Check className="w-4 h-4 text-brand-500" /> : <Share2 className="w-4 h-4" />}
+                        {copied ? <Check className="w-4 h-4 md:w-5 md:h-5 text-brand-500" /> : <Share2 className="w-4 h-4 md:w-5 md:h-5" />}
                         <span className={copied ? "text-brand-500" : ""}>{copied ? "Copied!" : "Share"}</span>
                     </button>
                 </div>
