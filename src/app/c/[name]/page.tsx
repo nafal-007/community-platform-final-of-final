@@ -93,9 +93,9 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
             <div className="lg:col-span-3 space-y-6">
 
                 {/* Community Header Mobile (Hidden on Desktop) */}
-                <div className="lg:hidden glass-panel p-6 mb-6 border-l-4 border-l-brand-500 rounded-none">
-                    <div className="flex items-center gap-3 mb-2">
-                        <div className="w-12 h-12 bg-surface-100 rounded-xl overflow-hidden flex items-center justify-center text-brand-500 font-bold text-xl relative">
+                <div className="lg:hidden glass-panel p-6 mb-6 border-l-4 border-l-brand-500 rounded-none overflow-hidden">
+                    <div className="flex items-center gap-4 mb-4">
+                        <div className="w-14 h-14 bg-surface-100 rounded-2xl overflow-hidden flex items-center justify-center text-brand-500 font-black text-2xl shadow-inner border border-surface-200/50">
                             {community.avatarUrl ? (
                                 <img src={community.avatarUrl} alt={community.name} className="w-full h-full object-cover" />
                             ) : (
@@ -103,61 +103,66 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                             )}
                         </div>
                         <div className="flex-1">
-                            <h1 className="text-2xl font-bold text-surface-900 flex items-center gap-2">
+                            <h1 className="text-xl font-bold text-surface-900 flex items-center gap-2">
                                 c/{community.name}
-                                {community.isPrivate && <Lock className="w-4 h-4 text-surface-900/60" />}
+                                {community.isPrivate && <Lock className="w-4 h-4 text-brand-500" />}
                             </h1>
                             <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] font-bold text-surface-900/60 uppercase tracking-widest bg-surface-100 px-2 py-0.5 rounded-md border border-surface-200">{community.category}</span>
-                                <span className="text-[10px] font-bold text-brand-500 uppercase tracking-widest bg-brand-500/10 px-2 py-0.5 rounded-md border border-brand-500/20">{community._count.members} Members</span>
+                                <span className="text-[10px] font-bold text-surface-900/60 uppercase tracking-widest bg-surface-800 px-2 py-1 rounded-lg border border-surface-100/50">{community.category}</span>
+                                <span className="text-[10px] font-black text-brand-500 uppercase tracking-widest bg-brand-500/10 px-2 py-1 rounded-lg border border-brand-500/20">{community._count.members} Members</span>
                             </div>
                         </div>
                     </div>
-                    <p className="text-surface-900/60 text-sm mt-3 mb-4">{community.description}</p>
 
-                    {/* Mobile Action Buttons */}
-                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-surface-100/50">
-                        {session && (
-                            isMember ? (
-                                <LeaveCommunityButton communityId={community.id} />
-                            ) : (
-                                <JoinCommunityButton
-                                    communityId={community.id}
-                                    initialState={existingRequest ? (existingRequest === "PENDING" ? "PENDING" : "JOIN") : "JOIN"}
-                                    isPrivate={community.isPrivate}
-                                />
-                            )
-                        )}
+                    <p className="text-surface-900/70 text-sm leading-relaxed mb-6 px-1 italic">"{community.description}"</p>
 
-                        {isAdmin && (
-                            <Link
-                                href={`/c/${encodeURIComponent(decodedName)}/settings`}
-                                className="px-4 py-2 bg-surface-800 hover:bg-surface-700 text-surface-900 text-xs font-bold rounded-lg flex items-center gap-2 transition-all border border-surface-100"
-                            >
-                                <Settings className="w-3.5 h-3.5" /> Manage
-                            </Link>
-                        )}
-
-                        {/* Mobile Members Toggle (Only visible on small screens) */}
-                        <div className="w-full mt-2">
-                            <details className="w-full group">
-                                <summary className="flex items-center justify-between p-3 bg-surface-100/50 rounded-xl cursor-pointer list-none hover:bg-surface-100 transition-colors border border-surface-200/50">
-                                    <div className="flex items-center gap-2">
-                                        <Users className="w-4 h-4 text-brand-500" />
-                                        <span className="text-sm font-bold text-surface-900">Community Members</span>
-                                    </div>
-                                    <span className="text-xs text-surface-900/40 font-bold group-open:rotate-180 transition-transform">▼</span>
-                                </summary>
-                                <div className="mt-2 p-1 bg-surface-50/30 rounded-2xl border border-surface-100/50 overflow-hidden">
-                                    <CommunityMemberList
+                    {/* Mobile Action Buttons & Member Drawer */}
+                    <div className="space-y-3 pt-4 border-t border-surface-100/30">
+                        <div className="flex flex-wrap gap-2">
+                            {session && (
+                                isMember ? (
+                                    <LeaveCommunityButton communityId={community.id} />
+                                ) : (
+                                    <JoinCommunityButton
                                         communityId={community.id}
-                                        members={membersList as any}
-                                        isAdmin={isAdmin}
-                                        currentUserId={session?.user?.id}
+                                        initialState={existingRequest ? (existingRequest === "PENDING" ? "PENDING" : "JOIN") : "JOIN"}
+                                        isPrivate={community.isPrivate}
                                     />
-                                </div>
-                            </details>
+                                )
+                            )}
+
+                            {isAdmin && (
+                                <Link
+                                    href={`/c/${encodeURIComponent(resolvedParams.name)}/settings`}
+                                    className="flex-1 min-w-[120px] py-2.5 bg-brand-500 hover:bg-brand-600 text-black font-black text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-brand-500/10"
+                                >
+                                    <Settings className="w-3.5 h-3.5" /> Admin Tools
+                                </Link>
+                            )}
                         </div>
+
+                        <details className="w-full group">
+                            <summary className="flex items-center justify-between p-3.5 bg-surface-100/30 rounded-2xl cursor-pointer list-none hover:bg-surface-100/50 transition-all border border-surface-200/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-brand-500/10 rounded-lg">
+                                        <Users className="w-4 h-4 text-brand-500" />
+                                    </div>
+                                    <span className="text-sm font-bold text-surface-900">Member Directory</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[10px] font-bold text-surface-900/40 uppercase">View All</span>
+                                    <span className="text-xs text-surface-900/40 font-bold group-open:rotate-180 transition-transform duration-300">▼</span>
+                                </div>
+                            </summary>
+                            <div className="mt-3 p-2 bg-surface-800/20 rounded-2xl border border-surface-100/20 backdrop-blur-sm">
+                                <CommunityMemberList
+                                    communityId={community.id}
+                                    members={membersList as any}
+                                    isAdmin={isAdmin}
+                                    currentUserId={session?.user?.id}
+                                />
+                            </div>
+                        </details>
                     </div>
                 </div>
 
