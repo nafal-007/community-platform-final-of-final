@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import JoinCommunityButton from "@/components/community/JoinCommunityButton";
 import LeaveCommunityButton from "@/components/community/LeaveCommunityButton";
+import CommunityMemberList from "@/components/community/CommunityMemberList";
 
 export const dynamic = "force-dynamic";
 
@@ -71,6 +72,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
     if (!community) {
         return notFound();
     }
+
+    const membersList = await prisma.communityMember.findMany({
+        where: { communityId: community.id },
+        include: { user: { select: { id: true, name: true, username: true, image: true } } },
+        orderBy: [{ role: 'asc' }]
+    });
 
     const isMember = session ? community.members.length > 0 : false;
     const isPlatformAdmin = session?.user?.role === "ADMIN";
@@ -223,6 +230,14 @@ export default async function CommunityPage({ params }: { params: Promise<{ name
                             </Link>
                         )}
                     </div>
+
+                    {/* Members List */}
+                    <CommunityMemberList
+                        communityId={community.id}
+                        members={membersList as any}
+                        isAdmin={isAdmin}
+                        currentUserId={session?.user?.id}
+                    />
 
                 </div>
             </div>

@@ -3,7 +3,7 @@
 @theme {
   --color-brand-50: #fbfedf;
   --color-brand-100: #f6fcb3;
-  --color-brand-500: #CCFF00;
+  --color-brand-500: var(--brand-500);
   --color-brand-600: #aadd00;
   --color-brand-900: #445500;
 
@@ -19,6 +19,8 @@
   --surface-100: #e2e8f0;
   --surface-800: #f8fafc;
   --surface-900: #000000;
+  --brand-500: #6b8f00;
+  /* Darker, high-contrast green for light backgrounds */
 }
 
 [data-theme='dark'] {
@@ -26,6 +28,8 @@
   --surface-100: #18191b;
   --surface-800: #1E1F21;
   --surface-900: #ffffff;
+  --brand-500: #CCFF00;
+  /* Original bright neon green for dark backgrounds */
 }
 
 @layer base {

@@ -144,7 +144,7 @@ export function EditProfileModal({ isOpen, onClose, currentBio, currentImage, cu
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Your Name"
                             maxLength={50}
-                            className="w-full bg-black border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm"
+                            className="w-full bg-surface-50 border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm"
                         />
                     </div>
                     <div className="flex-1 space-y-2">
@@ -163,7 +163,7 @@ export function EditProfileModal({ isOpen, onClose, currentBio, currentImage, cu
                             }}
                             placeholder="@username"
                             maxLength={20}
-                            className="w-full bg-black border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm"
+                            className="w-full bg-surface-50 border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm"
                         />
                     </div>
                 </div>
@@ -176,7 +176,7 @@ export function EditProfileModal({ isOpen, onClose, currentBio, currentImage, cu
                         onChange={(e) => setBio(e.target.value)}
                         placeholder="Tell the community about yourself..."
                         maxLength={160}
-                        className="w-full bg-black border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm resize-none h-24 placeholder:text-surface-900/40"
+                        className="w-full bg-surface-50 border border-surface-100 text-surface-900 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all text-sm resize-none h-24 placeholder:text-surface-900/40"
                     />
                     <div className="text-right text-xs text-surface-900/50">{bio.length}/160</div>
                 </div>
