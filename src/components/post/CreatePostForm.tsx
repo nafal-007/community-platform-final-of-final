@@ -76,8 +76,11 @@ export default function CreatePostForm({ communityId }: { communityId: string })
                     body: formData,
                 });
 
-                if (!uploadRes.ok) throw new Error("Failed to upload media to Cloudinary.");
                 const uploadData = await uploadRes.json();
+                if (!uploadRes.ok) {
+                    console.error("Cloudinary upload failed:", uploadData);
+                    throw new Error(uploadData.error?.message || "Failed to upload media to Cloudinary.");
+                }
                 uploadedMediaUrl = uploadData.secure_url;
             }
 
