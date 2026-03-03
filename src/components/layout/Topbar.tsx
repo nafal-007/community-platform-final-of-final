@@ -51,17 +51,27 @@ export function Topbar() {
                     </form>
                 </div>
 
-                {/* Center: Main Navigation Icons */}
-                <div className="hidden md:flex items-center justify-center gap-2 w-1/3">
-                    <Link href="/" className="p-3 text-brand-500 bg-brand-500/10 rounded-xl transition-all">
-                        <Home className="w-5 h-5" />
-                    </Link>
-                    <Link href="/communities" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
-                        <MessageSquare className="w-5 h-5" />
-                    </Link>
-                    <Link href="/settings" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
-                        <Settings className="w-5 h-5" />
-                    </Link>
+                {/* Center: Main Navigation Icons (Desktop) / Search Toggle (Mobile) */}
+                <div className="flex items-center justify-center gap-2 md:w-1/3">
+                    <div className="hidden md:flex items-center gap-2">
+                        <Link href="/" className="p-3 text-brand-500 bg-brand-500/10 rounded-xl transition-all">
+                            <Home className="w-5 h-5" />
+                        </Link>
+                        <Link href="/communities" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
+                            <MessageSquare className="w-5 h-5" />
+                        </Link>
+                        <Link href="/settings" className="p-3 text-surface-900/50 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
+                            <Settings className="w-5 h-5" />
+                        </Link>
+                    </div>
+
+                    {/* Mobile Search Icon */}
+                    <button
+                        onClick={() => router.push('/search')}
+                        className="md:hidden p-3 text-surface-900/60 hover:text-brand-500 hover:bg-surface-100 rounded-xl transition-all"
+                    >
+                        <Search className="w-5 h-5" />
+                    </button>
                 </div>
 
                 {/* Right: Auth & Profile */}

@@ -130,23 +130,23 @@ export default function DashboardPage() {
       )}
 
       {/* Digital Wellbeing Widget */}
-      <div className="glass-panel p-5 mb-8 flex items-center justify-between border-brand-500/20">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-500/30">
-            <Activity className="w-6 h-6 text-brand-500" />
+      <div className="glass-panel p-4 md:p-5 mb-6 md:mb-8 flex flex-col sm:flex-row items-center justify-between border-brand-500/20 gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-500/30 shrink-0">
+            <Activity className="w-5 h-5 md:w-6 md:h-6 text-brand-500" />
           </div>
           <div>
-            <h3 className="text-surface-900 font-bold text-lg">Digital Wellbeing</h3>
-            <p className="text-surface-900/60 text-sm">Time spent on US today</p>
+            <h3 className="text-surface-900 font-bold text-base md:text-lg">Digital Wellbeing</h3>
+            <p className="text-surface-900/60 text-xs md:text-sm">Time spent on US today</p>
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2 text-right">
+        <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto text-center sm:text-right">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-2xl font-bold text-surface-900 font-mono">{formatTime(totalSecondsToday)}</span>
-            <span className="text-surface-900/50 text-xs uppercase tracking-wider">/ 2h Limit</span>
+            <span className="text-xl md:text-2xl font-bold text-surface-900 font-mono">{formatTime(totalSecondsToday)}</span>
+            <span className="text-surface-900/50 text-[10px] md:text-xs uppercase tracking-wider">/ 2h Limit</span>
           </div>
-          <div className="w-48 h-2 bg-surface-100 rounded-full overflow-hidden">
+          <div className="w-full sm:w-48 h-2 bg-surface-100 rounded-full overflow-hidden">
             <div
               className={`h-full transition-all duration-1000 ${progressPercentage > 90 ? 'bg-red-500' : progressPercentage > 75 ? 'bg-orange-500' : 'bg-brand-500'}`}
               style={{ width: `${progressPercentage}%` }}

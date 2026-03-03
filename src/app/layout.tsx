@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 import { Toaster } from "react-hot-toast";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 export default function RootLayout({
   children,
@@ -31,7 +32,7 @@ export default function RootLayout({
             <Toaster position="top-center" />
             <TimeTrackerProvider>
               <Topbar />
-              <div className="flex flex-1 overflow-hidden max-w-[1600px] mx-auto w-full">
+              <div className="flex flex-1 overflow-hidden max-w-[1600px] mx-auto w-full pb-16 md:pb-0">
                 <Sidebar />
                 <main className="flex-1 overflow-y-auto border-x border-surface-100 bg-surface-50">
                   {children}
@@ -40,6 +41,7 @@ export default function RootLayout({
                   <QuickNoteWidget />
                 </aside>
               </div>
+              <MobileNav />
             </TimeTrackerProvider>
           </ThemeProvider>
         </AuthProvider>

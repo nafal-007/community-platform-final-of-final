@@ -161,9 +161,9 @@ export default function PostCard({ post }: { post: any }) {
                 </div>
             </div>
 
-            <div className="pl-13"> {/* Indent to align with text */}
-                <h4 className="text-lg font-bold text-surface-900 mb-2 leading-snug">{post.title}</h4>
-                <p className="text-sm text-surface-900/80 mb-4 whitespace-pre-wrap leading-relaxed">
+            <div className="md:pl-13"> {/* Indent only on desktop to align with text */}
+                <h4 className="text-base md:text-lg font-bold text-surface-900 mb-2 leading-snug">{post.title}</h4>
+                <p className="text-xs md:text-sm text-surface-900/80 mb-4 whitespace-pre-wrap leading-relaxed">
                     {post.content}
                 </p>
 
